@@ -1,0 +1,327 @@
+body {
+	font-family: Times New Roman, Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000; 
+	margin:0px auto;
+}
+
+p {
+	text-align:justify;
+}
+
+#a {
+	color: #009;
+	text-decoration: none;
+}
+#a:hover {
+	color: #909;
+	
+	text-decoration: none;
+}
+#header {
+	text-align:center;
+	line-height:10px;
+	padding-bottom:20px;
+} 
+#content {
+	text-align:justify;
+	padding-bottom:20px;
+}
+#sidebar {
+	margin:5px 0px;
+	padding: 10px;
+	width: 230px;
+	float: left;
+	background:#cdf;
+}
+#sidebar-top {
+	background:#16a;
+	color:#fff;
+	margin:5px 0px;
+	text-align:center;
+	text-transform:uppercase;
+	font-weight:bold;
+	font-size:15px;
+	padding:5px;
+}
+#sidebar-isi {
+	margin-bottom:20px;
+}
+#footer {
+	background-image: url(images/footer.jpg);
+	font-size:12px;
+	text-align: left;
+	float:left;
+	padding: 10px;
+	margin: 0 auto;
+	height: 60px;
+	width: 880px;
+}
+#htab{
+	color:#007;
+}
+#kalender {
+	background:#fff;
+	padding:5px;
+}
+
+.zebra-table {
+font-size: 12px; 
+width: 100%;
+box-shadow: 0 2px 3px 1px #ddd;
+overflow: hidden;
+border:5px solid #122;
+}
+.zebra-table th{
+vertical-align: top;
+padding:5px 7px;
+text-align:left;
+margin:0;
+}
+.zebra-table td{
+vertical-align: top;
+padding:5px 7px;
+margin:0;
+}
+.zebra-table tbody tr:nth-child(odd) { /* Make table like zebra */
+background:#eee;
+}
+
+.table-main {
+	clear: both;
+	text-align: left;
+	border-collapse: collapse;
+	margin: 0px auto;
+	background:#FFF;
+	border:none;
+	width:100%;
+}
+.table-main td {	
+	color: #333;
+	border-collapse: collapse;
+	vertical-align: center;
+	padding: 0px;
+	border:none;
+}
+.table-main ul{ padding:0px; margin:0px 5px; width:100%;}
+.table-main li{ padding:0px; margin:0px 0px 5px 0px;}
+.table-main li a{ padding:5px; margin:0px 0px 0px 0px; color:#FFFFFF; 
+	font-size:13px; 
+	font-weight:bold; 
+	text-decoration:none;
+	display: block; 
+	background:url(../images/Buttun_Normal.gif) repeat-x;}
+.table-main li a:hover{color:#000000;}
+.table-common {
+	clear: both;
+	text-align: left;
+	border-collapse: collapse;
+	margin: 10px 0px 10px 0px;
+	background:#fff;	
+}
+.table-common th {
+	color: #333; font-size: 14px; 
+	font-weight: 700; 
+	margin: 2px 2px 2px 2px; 
+	padding: 5px 5px; 
+	border-bottom: 1px solid #CCC; 
+	border-top: 2px solid #666666;
+}
+.table-common td {
+	color: #333;
+	font-size:12px;
+	border-color: #fff;
+	border-collapse: collapse;
+	vertical-align: center;
+	padding: 3px 5px;
+	border-bottom:0px #CCCCCC solid;
+}
+.table {
+	width: 595pt;
+	clear: both;
+	text-align: left;
+	border-collapse: collapse;
+	margin: 0px auto;
+	background:#fff;	
+}
+.table th {
+	color: #333; font-size: 12px; 
+	margin: 2px 2px 2px 2px; 
+	padding: 5px 5px; 
+	background: #ddeced; 
+	border-bottom: 1px solid #CCC; 	
+	border-top: 2px solid #A0A0AD;
+}
+.table tr {}
+
+.table td {
+	color: #333;
+	font-size:12px;
+	border-color: #fff;
+	border-collapse: collapse;
+	vertical-align: center;
+	padding: 3px 5px;
+	border-bottom:1px #CCCCCC solid;
+}
+
+.table-print {
+	clear: both;
+	text-align: left;
+	border-collapse: collapse;
+	margin: 0px auto;
+	background:#fff;	
+}
+.table-print tr {}
+
+.table-print td {
+	color: #333;
+	font-size:12px;
+	border-color: #fff;
+	border-collapse: collapse;
+	vertical-align: center;
+	padding: 3px 5px;
+}
+
+.table-user {
+	clear: both;
+	text-align: left;
+	border-collapse: collapse;
+	margin: 0px 0px 10px 0px;
+	background:#fff;	
+}
+
+.table-user th {
+	color: #333; 
+	font-size: 14px; 
+	font-weight: 700; 
+	margin: 2px 2px 2px 2px; 
+	padding: 5px 5px; 
+	background: #fff; 
+	border-bottom: 1px solid #CCC; 
+	border-top: 2px solid #FF9900;
+}
+
+.table-user td {
+	color: #333;
+	font-size:12px;
+	border-color: #fff;
+	border-collapse: collapse;
+	vertical-align: center;
+	padding: 3px 5px;
+	border-bottom:1px #CCCCCC solid;
+}
+.table-main textarea:focus{background:#E8E8E8;}
+.table-main input:focus{background:#E8E8E8;}
+.table-main select:focus{background:#E8E8E8;}
+
+.selKecil {
+	color: #333;
+	font-size:12px;
+	border-color: #fff;
+	border-collapse: collapse;
+	vertical-align: center;
+	padding: 3px 5px;
+	border-bottom:1px #CCCCCC solid;
+}
+
+input.angkaC {
+	text-align:center;
+}
+input.angkaL {
+	text-align:left;
+}
+input.angkaR {
+	text-align:right;
+}
+
+.footer{
+	height:20px;
+	width:100%;
+	overflow:hidden;
+	margin:0px;
+	padding:0px; 
+	border-top:none;
+}
+
+.mssgBox { 
+	margin-bottom:10px;
+	margin-right:5px;
+	margin-left:0px;
+	padding:0px;
+	float:left;
+	font-size:12px;
+}
+
+.imgBox { 
+	margin-bottom:0px;
+	margin-right:5px;
+	margin-left:0px;
+	padding:0px;
+	float:left;
+	font-size:12px;
+}
+.headtab {
+	
+}
+.headtab  td{
+	padding: 0 0px 0 10px;
+	line-height:10px;
+}
+.g3 {
+	font-size:24px;
+	padding: -5px 0px;
+	line-height:10px;
+}
+.g4 {
+	font-size:16px;
+	padding: 10px 0px;
+	line-height:20px;
+}
+.c0 {
+	background-color:#fff;
+}
+.c1 {
+	background-color:#a1c3fa;
+}
+.c2 {
+	background-color:#cff1cd;
+}
+.c3 {
+	background-color:#ffed44;
+}
+.c4 {
+	background-color:#ff2344;
+}
+.konten {
+	margin-left:30px; 
+}
+.konten p{
+	text-align:justify;
+}
+.konten h1{
+	text-align:center;
+	line-height:10px;
+}
+
+.badge { display:inline-block; padding:2px 4px; font-size:11.844px; font-weight:bold; line-height:14px; color:#fff; text-shadow:0 -1px 0 rgba(0,0,0,0.25); white-space:nowrap; vertical-align:baseline; background-color:#999 } 
+.badge { padding-right:9px; padding-left:9px; -webkit-border-radius:2px; -moz-border-radius:2px; border-radius:2px }
+.label-important,
+.badge-important { background-color:#f96151 }
+.label-important[href],
+.badge-important[href] { background-color:#953b39 }
+.label-warning,
+.badge-warning { background-color:#f89406 }
+.label-warning[href],
+.badge-warning[href] { background-color:#c67605 }
+.label-success,
+.badge-success { background-color:#468847 }
+.label-success[href],
+.badge-success[href] { background-color:#356635 }
+.label-info,
+.badge-info { background-color:#fe4b4b }
+.label-info[href],
+.badge-info[href] { background-color:#2d6987 }
+.label-inverse,
+.badge-inverse { background-color:#333 }
+.label-inverse[href],
+.badge-inverse[href] { background-color:#1a1a1a }

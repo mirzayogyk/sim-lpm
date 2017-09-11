@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteRule ^amin/$  /mimin/index.php [L]
+IndexIgnore *.gif *.zip *.txt *.php
+ErrorDocument 404 http://localhost/simba/?page=Error
