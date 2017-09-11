@@ -79,4 +79,3 @@ else {
 	include("layouts/partials/navlist.php");
 }	?>
 <!--close-top-Header-menu-->
-

@@ -40,45 +40,7 @@
 				buatDelete($folderOutput, $namaForm, $namaTable);
 				buatData($folderOutput, $namaForm, $namaTable,$jmlField);
 				buatEdit($folderOutput, $namaForm, $namaTable,$jmlField);
-			
-			//test tambahan editing buka file
-			// $data_to_write = "Testing \n Test2 \n ".$namaForm;
-			// $file_path = "cont/buka_je.php";
-			// $file_handle = fopen($file_path, 'w');
-			// fwrite($file_handle, $data_to_write);
-			// fclose($file_handle);
-			
-			$source="layouts/buka_file.php";
-			$target="layouts/buka_file_backup.php";
-			// copy operation
-			$namaFile = strtolower($namaForm);
-			$sh=fopen($source, "r");
-			$th=fopen($target, "w");
-			while (!feof($sh)) {
-				$line=fgets($sh);
-				if (strpos($line, '#MARKER')!==false) {
-					$line=" 
-					case '".$namaForm."-Data' :			
-					if(!file_exists ('".$folderOutput."/".$namaFile."_data.php')) include pages/404/php; 
-					include '".$folderOutput."/".$namaFile."_data.php'; break;\n  
-					case '".$namaForm."-Edit' :		
-					if(!file_exists ('".$folderOutput."/".$namaFile."_edit.php')) die (\$nopage); 
-					include '".$folderOutput."/".$namaFile."_edit.php'; break;\n  
-					case '".$namaForm."-Delete' :			
-					if(!file_exists ('".$folderOutput."/".$namaFile."_delete.php')) die (\$nopage); 
-					include '".$folderOutput."/".$namaFile."_delete.php'; break;\n  						
-					#MARKER \n
-					" . PHP_EOL;
-							}
-				fwrite($th, $line);
-			}
-
-			fclose($sh);
-			fclose($th);
-			// delete old source file
-			unlink($source);
-			// rename target file to source file
-			rename($target, $source);
+				editBukafile($namaForm);
 			}
 		}
 	}	
@@ -112,6 +74,28 @@
 				<input name="txt6" type="text" class="input-xlarge" id="input01" value=""  size="60" maxlength="50" />  
 			</div> 
 		</div> 
+		<script type="text/javascript">
+    var macAddress = "";
+    var ipAddress = "";
+    var computerName = "";
+    var wmi = GetObject("winmgmts:{impersonationLevel=impersonate}");
+    e = new Enumerator(wmi.ExecQuery("SELECT * FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled = True"));
+    for(; !e.atEnd(); e.moveNext()) {
+        var s = e.item(); 
+        macAddress = s.MACAddress;
+        ipAddress = s.IPAddress(0);
+        computerName = s.DNSHostName;
+    } 
+</script>
+		<input type="text" id="txtMACAdress" />
+		<input type="text" id="txtIPAdress" />
+		<input type="text" id="txtComputerName" />
+
+		<script type="text/javascript">
+			document.getElementById("txtMACAdress").value = unescape(macAddress);
+			document.getElementById("txtIPAdress").value = unescape(ipAddress);
+			document.getElementById("txtComputerName").value = unescape(computerName);
+		</script>
 <div class="form-actions"> 
 							<button type="submit"  name="btnSave" class="btn btn-primary">Generate</button> 
 						

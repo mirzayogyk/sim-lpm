@@ -72,7 +72,7 @@ if($_GET) {
 					if($loginData['level']=="2") {
 					$_SESSION['MAIN_DAS_L4H'] = $loginData['nama'];
 					}
-					 
+					buatLog($loginData['username'],"LOGGED IN","NULL");
 					echo "<meta http-equiv='refresh' content='0; url=?page=Halaman-Utama'>";
 				}
 				else {

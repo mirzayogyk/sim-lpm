@@ -655,28 +655,51 @@ for($i=1;$i<=$jmlField;$i++){
 }
 
 function editBukafile($namaForm){
-	$source="cont/buka_file.php";
-	$target="cont/buka_je1.php";
+	$source="layouts/buka_file.php";
+	$target="layouts/buka_file_backup.php";
 	// copy operation
 	$namaFile = strtolower($namaForm);
 	$sh=fopen($source, "r");
 	$th=fopen($target, "w");
 	while (!feof($sh)) {
 		$line=fgets($sh);
-		if (strpos($line, '#UNTUKHANGAT')!==false) {
-		 $line=" 
+		if (strpos($line, '#MARKER')!==false) {
+			$line=" 
 			case '".$namaForm."-Data' :			
-			if(!file_exists ('hasilGen/".$namaFile."_data.php')) die (\$nopage); 
-			include 'hasilGen/".$namaFile."_data.php'; break;\n  
+			if(!file_exists ('".$folderOutput."/".$namaFile."_data.php')) include \"pages/404.php\"; 
+			include '".$folderOutput."/".$namaFile."_data.php'; break;\n  
 			case '".$namaForm."-Edit' :		
-			if(!file_exists ('hasilGen/".$namaFile."_edit.php')) die (\$nopage); 
-			include 'hasilGen/".$namaFile."_edit.php'; break;\n  
+			if(!file_exists ('".$folderOutput."/".$namaFile."_edit.php')) include \"pages/404.php\"; 
+			include '".$folderOutput."/".$namaFile."_edit.php'; break;\n  
 			case '".$namaForm."-Delete' :			
-			if(!file_exists ('hasilGen/".$namaFile."_delete.php')) die (\$nopage); 
-			include 'hasilGen/".$namaFile."_delete.php'; break;\n  						
-						#UNTUKHANGAT \n
+			if(!file_exists ('".$folderOutput."/".$namaFile."_delete.php')) dinclude \"pages/404.php\"; 
+			include '".$folderOutput."/".$namaFile."_delete.php'; break;\n  						
+			#MARKER \n
 			" . PHP_EOL;
 					}
+		fwrite($th, $line);
+	}
+	fclose($sh);
+	fclose($th);
+	// delete old source file
+	unlink($source);
+	// rename target file to source file
+	rename($target, $source);
+}
+
+function buatLog($user, $activity, $data){
+	$source="logs/logs.txt";
+	$target="logs/logs_backup.txt";
+	$sh=fopen($source, "r");
+	$th=fopen($target, "w");
+	$ippengguna=$_SERVER['REMOTE_ADDR'];
+	while (!feof($sh)) {
+		$line=fgets($sh);
+		if (strpos($line, '#MARKER')!==false) {
+		 $line="
+		 [".date("Y-m-d h:i:sa")."][".$user."][".$ippengguna."][".$activity."][".$data."]
+		 #MARKER". PHP_EOL;
+		}
 		fwrite($th, $line);
 	}
 

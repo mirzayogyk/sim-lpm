@@ -11,9 +11,9 @@ if($_GET) {
 			if(!file_exists ("page/404.php")) die ("Halaman Rusak!"); 
 			include "page/404.php";	break;
 			
-		case 'Halaman-Utama' :				
-			if(!file_exists ("page/home.php")) die ("Sorry Empty Page!"); 
-			include "page/home.php";	break;		
+		case 'Home' :				
+			if(!file_exists ("pages/home.php")) die ("Sorry Empty Page!"); 
+			include "pages/home.php";	break;		
 
 		case 'Terima-Kasih' :				
 			if(!file_exists ("page/terima_kasih.php")) die ("Sorry Empty Page!"); 
