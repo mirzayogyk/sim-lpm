@@ -12,6 +12,8 @@
 [2017-09-11 06:51:11pm][sudo][::1][LOGGED IN][NULL]
 [2017-09-19 06:02:41am][sudo][::1][LOGGED IN][NULL]
 [2017-10-01 08:07:56am][sudo][::1][LOGGED IN][NULL]
+[2017-10-01 09:04:26pm][sudo][::1][INSERT SUCCESS][INSERT INTO tfakultas (created_at, updated_at, kode_fakultas, fakultas, id_dekan, nama_dekan ) VALUES ('2017-10-01 09:04:26pm', '', 'ss', 'dd', 'ff', 'gg')]
+[2017-10-01 09:04:32pm][sudo][::1][INSERT FAIL][Array]
 #MARKER
 
 

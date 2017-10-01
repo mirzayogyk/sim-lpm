@@ -32,7 +32,7 @@ if($_GET) {
 				<h4 class="alert-heading">Error!</h4>'.$noPesan.'. '.$pesan_tampil.'</div><br>';	 
 			}  
 			echo "</div> <br>";  
-			buatLog($_SESSION['BONCLINK_M4SUK'],"INSERT FAIL",$pesanError);
+			buatLog($_SESSION['BONCLINK_M4SUK'],"INSERT FAIL",getStringArray($pesanError));
 		} 
 		else { 
 			$mySql	= "INSERT INTO ".$tableName." ".getInsert($jmlField,$field,$txt); 

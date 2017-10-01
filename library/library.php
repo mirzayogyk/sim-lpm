@@ -231,6 +231,17 @@ function getUpdate($jml,$field,$txt){
 	return $s;
 }
 
+function getStringArray($pesanError){
+	$jml = count($pesanError);
+	$s="(".$pesanError[0];
+	for($i=1;$i<=$jml;$i++){
+		$s = $s.", ".$pesanError[$i];
+	}
+	
+	$s = $s." )";
+	return $s;
+}
+
 function cekAda($koneksidb,$tableName,$field,$isian,$txt){
 	$cekSql="SELECT * FROM ".$tableName." WHERE ".$field."='".$txt."'";
 	$cekQry=mysqli_query($koneksidb, $cekSql) or die ("Eror Query".mysqli_error()); 
