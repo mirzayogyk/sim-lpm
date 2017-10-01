@@ -94,26 +94,9 @@ $max	 = ceil($jml/$row);
 							buatInputText($isian[3],3,$data[3]); 
 							buatInputText($isian[4],4,$data[4]); 	
 							buatInputText($isian[5],5,$data[5]); 	
-							buatInputText($isian[6],6,$data[6]); 							
+							buatInputText($isian[6],6,$data[6]); 
+							buatInputSelect($isian[7],7,$data[7],"tFakultas",$koneksidb,"Fakultas");
 						?>
-						<tr> 
-						<td width="24%"><b><?php echo $isian[7]; ?></b></td>  
-						<td width="2%"><b>:</b></td>  
-						<td width="74%"><select name="txt7" class="span4"> 
-								<?php
-								$mySql2 = "SELECT * FROM tfakultas ORDER BY fakultas ASC";
-								$myQry = mysqli_query($koneksidb, $mySql2) or die ("Gagal Query ruangan  ".mysqli_error($koneksidb));
-								while ($kolomData1 = mysqli_fetch_array($myQry)) {
-									if ($data[7] == $kolomData1['id']) {
-										$cek = "selected";
-									} else { $cek=""; }
-									
-									echo "<option value='$kolomData1[id]' $cek> $kolomData1[fakultas] </option>";
-								}
-								$mySql ="";
-								?>
-								</select></td>  
-					</tr> 
 						<tr> 
 							 <td>&nbsp;</td> 
 							 <td>&nbsp;</td> 

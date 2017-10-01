@@ -175,8 +175,8 @@ function buatTombol($formName,$Kode,$kolom){
 }
 
 function tampilTabel($koneksidb,$tableName,$field,$formName,$hal,$row){
-	$mySql = "SELECT $tableName.* FROM ".$tableName." ORDER BY ".$field[1]." ASC LIMIT $hal, $row";
-	$myQry = mysqli_query($koneksidb, $mySql)  or die ("Query salah : ".mysql_error());
+	$mySql = "SELECT $tableName.* FROM ".$tableName." ORDER BY ".$field[4]." ASC LIMIT $hal, $row";
+	$myQry = mysqli_query($koneksidb, $mySql)  or die ("Query salah : ".$mySql);
 	$nomor  = 1+$hal; 
 	while ($kolomData = mysqli_fetch_array($myQry)) {
 		$Kode = $kolomData[$field[0]];
@@ -623,6 +623,28 @@ function buatInputText($text,$i,$data){
 	echo("							<td width=\"24%\"><b>".$text."</b></td>  \n");
 	echo("							<td width=\"2%\"><b>:</b></td>  \n");
 	echo("							<td width=\"74%\"><input name=\"txt".$i."\" type=\"text\" class=\"input-xxlarge\" value=\"".$data."\" size=\"60\" maxlength=\"60\"  /></td>  \n");
+	echo("						</tr> \n");
+}
+
+function buatInputSelect($text,$i,$data,$namaTable,$koneksidb,$orderby){
+	echo("						<tr> \n");
+	echo("							<td width=\"24%\"><b>".$text."</b></td>  \n");
+	echo("							<td width=\"2%\"><b>:</b></td>  \n");
+	echo("							<td width=\"74%\">
+										<select name=\"txt".$i."\" class=\"span4\">");
+	
+										$mySql = "SELECT * FROM ".$namaTable." ORDER BY ".$orderby." ASC";										
+										$myQry = mysqli_query($koneksidb, $mySql) or die ("Gagal Query ruangan  ".$mySql);
+										
+										while ($kolomData1 = mysqli_fetch_array($myQry)) {
+											if ($data == $kolomData1['id']) {
+												$cek = "selected";
+											} else { $cek=""; }
+											
+											echo "<option value='$kolomData1[id]' $cek>$kolomData1[4] </option>";
+										}
+	echo("								</select>
+									</td>  \n");
 	echo("						</tr> \n");
 }
 ?>
