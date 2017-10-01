@@ -55,7 +55,7 @@ if($_GET) {
 } 
 $row = 20; 
 $hal = isset($_GET['hal']) ? $_GET['hal'] : 0; 
-$pageSql = "SELECT $tableName.* FROM ".$tableName." ORDER BY ".$field[1]." ASC LIMIT $hal, $row"; 
+$pageSql = "SELECT $tableName.* FROM ".$tableName." ORDER BY ".$field[1]." ASC"; 
  
 if(isset($_POST['qcari'])){ 
   $qcari=$_POST['qcari']; 
@@ -154,7 +154,7 @@ $max	 = ceil($jml/$row);
 		<th width="10" colspan="2"><strong>Option</strong></td> 
 	</tr> 
 <?php 
-tampilTabel($pageQry,$tableName,$field,$formName,$hal,$row); 
+tampilTabel($koneksidb,$tableName,$field,$formName,$hal,$row); 
 ?> 
 </table> 
 <?php tabelFooter($jml,$row,$max,$formName,$hal) ?> 

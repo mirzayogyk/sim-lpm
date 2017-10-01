@@ -175,10 +175,10 @@ function buatTombol($formName,$Kode,$kolom){
 }
 
 function tampilTabel($koneksidb,$tableName,$field,$formName,$hal,$row){
-	//$mySql = "SELECT $tableName.* FROM ".$tableName." ORDER BY ".$field[1]." ASC LIMIT $hal, $row";
-	//$myQry = mysqli_query($koneksidb, $mySql)  or die ("Query salah : ".mysql_error());
-	$nomor  = 1; 
-	while ($kolomData = mysqli_fetch_array($koneksidb)) {
+	$mySql = "SELECT $tableName.* FROM ".$tableName." ORDER BY ".$field[1]." ASC LIMIT $hal, $row";
+	$myQry = mysqli_query($koneksidb, $mySql)  or die ("Query salah : ".mysql_error());
+	$nomor  = 1+$hal; 
+	while ($kolomData = mysqli_fetch_array($myQry)) {
 		$Kode = $kolomData[$field[0]];
 		echo("<tr>");
 		echo("<td align=\"center\">".$nomor++."</td>");
@@ -199,7 +199,7 @@ function tabelFooter($jml,$row,$max,$formName,$hal){
 	echo("<table class=\"table table-bordered table-striped\">");
 	echo("<tr><td><div class =\"pagination\"><ul><li>");
 	echo("	<a href=\"?page=");
-			$g = $hal-1;
+			$g = $hal-20;
 			if ($g<=0)
 				{$g=0;}	
 	echo ($formName."-Data&hal=$g\">Prev</a>");
@@ -209,7 +209,6 @@ function tabelFooter($jml,$row,$max,$formName,$hal){
 		  $list[$h] = $row * $h - $row;
 		  echo " <li><a href='?page=".$formName."-Data&hal=".$list[$h]."'>$h</a></li> ";
 	  }
-	echo ($max." - ".$h." - ".$jml." - ".$row);
 	echo("</ul></div>");
 	echo "	</td> </tr> 	</table>";
 }
@@ -468,7 +467,7 @@ for($i=1;$i<=$jmlField;$i++){
 
 	fwrite($myfile, "\$row = 20; \n");
 	fwrite($myfile, "\$hal = isset(\$_GET['hal']) ? \$_GET['hal'] : 0; \n");
-	fwrite($myfile, "\$pageSql = \"SELECT \$tableName.* FROM \".\$tableName.\" ORDER BY \".\$field[1].\" ASC LIMIT \$hal, \$row\"; ");
+	fwrite($myfile, "\$pageSql = \"SELECT \$tableName.* FROM \".\$tableName.\" ORDER BY \".\$field[1].\" ASC \"; ");
 	fwrite($myfile, " \n");
 	fwrite($myfile, "if(isset(\$_POST['qcari'])){ \n");
 	fwrite($myfile, "  \$qcari=\$_POST['qcari']; \n");
@@ -538,137 +537,7 @@ for($i=3;$i<=$jmlField;$i++){
 
 	fwrite($myfile, "	</tr> \n");
 	fwrite($myfile, "<?php \n");
-	fwrite($myfile, "tampilTabel(\$pageQry,\$tableName,\$field,\$formName,\$hal,\$row); \n");
-	fwrite($myfile, "?> \n");
-	fwrite($myfile, "</table> \n");
-  	fwrite($myfile, "<?php tabelFooter(\$jml,\$row,\$max,\$formName,\$hal) ?> \n");
-}
-function buatData1($folderOutput, $namaForm, $namaTable,$jmlField){
-	$namaFile = strtolower($namaForm);
-	$myfile = fopen($folderOutput."/".$namaFile."_data.php", "w") or die("Unable to open file!");
-	fwrite($myfile, "<?php \n");
-	fwrite($myfile, "include_once \"library/seslogin.php\"; \n");
-	fwrite($myfile, "include_once \"".$namaFile."_config.php\"; \n");
-	fwrite($myfile, "if(\$_GET) { \n");
-	fwrite($myfile, "	if(isset(\$_POST['btnSave'])){ \n");
-	fwrite($myfile, " \n");
-
-for($i=1;$i<=$jmlField;$i++){
-	fwrite($myfile, "		\$txt[".$i."] = \$_POST['txt".$i."']; \n");		
-}
-	fwrite($myfile, " \n");
-	fwrite($myfile, "		\$pesanError = array(); \n");
-	fwrite($myfile, "		for(\$i=1;\$i<=\$jmlField;\$i++){ \n");
-	fwrite($myfile, "			if (trim(\$txt[\$i])==\"\") { \n");
-	fwrite($myfile, "				\$pesanError[] = \"Data <b>\".\$isian[\$i].\"</b> tidak boleh kosong !\"; \n"); 		
-	fwrite($myfile, "			} \n");
-	fwrite($myfile, "		} \n");	
-	fwrite($myfile, " \n");
-
-	fwrite($myfile, "		\$ada = cekAda(\$koneksidb,\$tableName,\$field[3],\$isian[3],\$txt[3]); \n");
-	fwrite($myfile, "		if(\$ada)        {  \n");
-	fwrite($myfile, "			\$pesanError[] = \"Maaf, \".\$isian[3].\" <b> \".\$txt[3].\" </b> Sudah Ada.\";	 \n");
-	fwrite($myfile, "		} \n");
-	fwrite($myfile, " \n");
-	fwrite($myfile, "		if (count(\$pesanError)>=1 ){  \n");
-	fwrite($myfile, "			echo \"<div class='mssgBox'>\";  \n");
-	fwrite($myfile, "			\$noPesan=0; \n");
-	fwrite($myfile, "			foreach (\$pesanError as \$indeks=>\$pesan_tampil) {  \n");
-	fwrite($myfile, "				\$noPesan++;  \n");
-	fwrite($myfile, "				echo '<div class=\"alert alert-error alert-block\"> <a class=\"close\" data-dismiss=\"alert\" href=\"#\">×</a> \n");
-	fwrite($myfile, "				<h4 class=\"alert-heading\">Error!</h4>'.\$noPesan.'. '.\$pesan_tampil.'</div><br>';	 \n");
-	fwrite($myfile, "			}  \n");
-	fwrite($myfile, "			echo \"</div> <br>\";  \n");
-	fwrite($myfile, "		} \n");
-	fwrite($myfile, "		else { \n");
-	fwrite($myfile, "			\$mySql	= \"INSERT INTO \".\$tableName.\" \".getInsert(\$jmlField,\$field,\$txt); \n");
-	fwrite($myfile, "			\$myQry	= mysqli_query(\$koneksidb, \$mySql) or die (\"Gagal query insert :\".getInsert(\$jmlField,\$field,\$txt)); \n");
-	fwrite($myfile, "			if(\$myQry){ \n");
-	fwrite($myfile, "				echo \"<meta http-equiv='refresh' content='0; url=?page=\".\$formName.\"-Data'>\"; \n");
-	fwrite($myfile, "			} \n");
-	fwrite($myfile, "			exit; \n");
-	fwrite($myfile, "		} \n");
-	fwrite($myfile, "	} \n");
-	fwrite($myfile, " \n");
-	
-for($i=1;$i<=$jmlField;$i++){
-	fwrite($myfile, "	\$data[".$i."]	= isset(\$_POST['txt".$i."']) ? \$_POST['txt".$i."'] : ''; \n");		
-}
-	fwrite($myfile, "} \n");
-
-	fwrite($myfile, "\$row = 20; \n");
-	fwrite($myfile, "\$hal = isset(\$_GET['hal']) ? \$_GET['hal'] : 0; \n");
-	fwrite($myfile, "\$pageSql = \"SELECT \$tableName.* FROM \".\$tableName; \n");
-	fwrite($myfile, " \n");
-	fwrite($myfile, "if(isset(\$_POST['qcari'])){ \n");
-	fwrite($myfile, "  \$qcari=\$_POST['qcari']; \n");
-	fwrite($myfile, "  \$pageSql=\"SELECT \$tableName.* FROM \".\$tableName.\" WHERE  (\".\$field[2].\" like '%\$qcari%') ORDER BY \".\$field[2].\" \"; \n");
-	fwrite($myfile, "} \n");
-	fwrite($myfile, " \n");
-	fwrite($myfile, "\$pageQry = mysqli_query(\$koneksidb, \$pageSql) or die (\"error paging: \".\$pageSql); \n");
-	fwrite($myfile, "\$jml	 = mysqli_num_rows(\$pageQry); \n");
-	fwrite($myfile, "\$max	 = ceil(\$jml/\$row); \n");
-	fwrite($myfile, " \n");
-	fwrite($myfile, "?> \n");
-	fwrite($myfile, " \n");
-	
-	fwrite($myfile, "<table class=\"table table-striped\"> \n");
-	fwrite($myfile, "	<tr> \n");
-	fwrite($myfile, "	  <td colspan=\"2\"><h1><b> <?php echo \$formName;?> </b>  \n");
-	fwrite($myfile, "	  <form class=\"navbar-search pull-right\"  method=\"POST\" action=\"?page=<?php echo \$formName?>-Data\">  \n");
-	fwrite($myfile, "		  <input type=\"text\" name=\"qcari\" placeholder=\"Cari...\" autofocus/> \n");
-	fwrite($myfile, "	  </form></h1> </td> \n");
-	fwrite($myfile, "	</tr> \n");
-	fwrite($myfile, "</table> \n");
-  
-	fwrite($myfile, "<div class=\"accordion\" id=\"collapse-group\">         \n");              
-	fwrite($myfile, "  <div class=\"accordion-group widget-box\"> \n");
-	fwrite($myfile, "	  <div class=\"accordion-heading\"> \n");
-	fwrite($myfile, "		  <div class=\"widget-title\"> \n");
-	fwrite($myfile, "			  <a data-parent=\"#collapse-group\" href=\"#collapseGTwo\" data-toggle=\"collapse\"> \n");
-	fwrite($myfile, "				  <span class=\"icon\"><i class=\"icon-circle-arrow-right\"></i></span><h5>Tambah Data <?php  echo \$formName ?></h5> \n");
-	fwrite($myfile, "			  </a> \n");
-	fwrite($myfile, "		  </div> \n");
-	fwrite($myfile, "	  </div> \n");
-	fwrite($myfile, "	  <div class=\"collapse accordion-body\" id=\"collapseGTwo\"> \n");
-	fwrite($myfile, "		  <div class=\"widget-content\">      \n");
-	fwrite($myfile, "			  <form id=\"new-project\" class=\"form-horizontal \" action=\"?page=<?php echo \$formName;?>-Data\" method=\"post\" name=\"form1\" target=\"_self\"> \n");
-	fwrite($myfile, "				  <fieldset> \n");
-	fwrite($myfile, "					<table class=\"table table-striped\"> \n");
-for($i=1;$i<=$jmlField;$i++){
-	fwrite($myfile, "						<tr> \n");
-	fwrite($myfile, "							<td width=\"24%\"><b><?php echo \$isian[".$i."]; ?></b></td>  \n");
-	fwrite($myfile, "							<td width=\"2%\"><b>:</b></td>  \n");
-	fwrite($myfile, "							<td width=\"74%\"><input name=\"txt".$i."\" type=\"text\" class=\"input-xxlarge\" value=\"<?php echo \$data[".$i."]; ?>\" size=\"60\" maxlength=\"60\"  /></td>  \n");
-	fwrite($myfile, "						</tr> \n");
-}
-	fwrite($myfile, "						<tr> \n");
-	fwrite($myfile, "							 <td>&nbsp;</td> \n");
-	fwrite($myfile, "							 <td>&nbsp;</td> \n");
-	fwrite($myfile, "							 <td><button type=\"submit\"  name=\"btnSave\" class=\"btn btn-primary\">Simpan</button> \n");
-	fwrite($myfile, "								<button type=\"reset\" class=\"btn \" name=\"reset\" id=\"reset\" onclick=\"return confirm('Reset data yang telah anda ketik?')\"/>Reset</button> \n");
-	fwrite($myfile, "							  	<a class=\"toggle-link\" href=\"#new-project\"><button type=\"button\" class=\"btn \" name=\" KEMBALI \" id=\"cancel\" value=\" BATAL \" /><!-- onclick=\"history.back();\" --> Batal </button></a> \n");
-	fwrite($myfile, "							 </td> \n");
-	fwrite($myfile, "						</tr> \n");
-	fwrite($myfile, "					 </table> \n");
-	fwrite($myfile, "				 </fieldset> \n");
-	fwrite($myfile, "			 </form> \n");
-	fwrite($myfile, "		 </div> \n");
-	fwrite($myfile, "	 </div> \n");
-	fwrite($myfile, "  </div> \n");
-	fwrite($myfile, "</div>		 \n");			
-
-	fwrite($myfile, "<table class=\"table table-bordered table-striped\"> \n");
-	fwrite($myfile, "	<tr> \n");
-	fwrite($myfile, "		<th width=\"60\" align=\"center\"><strong>No</strong></th> \n");
-for($i=1;$i<=$jmlField;$i++){
-	fwrite($myfile, "		<th><strong><?php echo \$isian[".$i."]; ?></strong></th> \n");
-}
-	fwrite($myfile, "		<th width=\"10\" colspan=\"2\"><strong>Option</strong></td> \n");
-
-	fwrite($myfile, "	</tr> \n");
-	fwrite($myfile, "<?php \n");
-	fwrite($myfile, "tampilTabel(\$pageQry,\$tableName,\$field,\$formName,\$hal,\$row); \n");
+	fwrite($myfile, "tampilTabel(\$koneksidb,\$tableName,\$field,\$formName,\$hal,\$row); \n");
 	fwrite($myfile, "?> \n");
 	fwrite($myfile, "</table> \n");
   	fwrite($myfile, "<?php tabelFooter(\$jml,\$row,\$max,\$formName,\$hal) ?> \n");
