@@ -5,6 +5,7 @@
     <li> <a href="#"><i class="icon icon-hdd"></i> <span>Master Data</span></a> 
 		  <ul>
 <li><a href="?page=Fakultas-Data">Data Fakultas</a> </li>
+<li><a href="?page=Prodi-Data">Data Prodi</a> </li>
 <!-- MARKER -->
 		  </ul>
 	 </li> 
