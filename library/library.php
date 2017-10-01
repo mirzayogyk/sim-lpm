@@ -195,6 +195,7 @@ function tampilTabel($koneksidb,$tableName,$field,$formName,$hal,$row){
 }
 
 function tabelFooter($jml,$row,$max,$formName,$hal){
+	$max=ceil($jml/$row);
 	echo("<table class=\"table table-bordered table-striped\">");
 	echo("<tr><td><div class =\"pagination\"><ul><li>");
 	echo("	<a href=\"?page=");
@@ -208,7 +209,7 @@ function tabelFooter($jml,$row,$max,$formName,$hal){
 		  $list[$h] = $row * $h - $row;
 		  echo " <li><a href='?page=".$formName."-Data&hal=".$list[$h]."'>$h</a></li> ";
 	  }
-
+	echo ($max." - ".$h." - ".$jml." - ".$row);
 	echo("</ul></div>");
 	echo "	</td> </tr> 	</table>";
 }
