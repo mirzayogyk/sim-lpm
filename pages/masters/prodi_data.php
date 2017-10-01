@@ -90,26 +90,12 @@ $max	 = ceil($jml/$row);
 			  <form id="new-project" class="form-horizontal " action="?page=<?php echo $formName;?>-Data" method="post" name="form1" target="_self"> 
 				  <fieldset> 
 					<table class="table table-striped"> 
-						<tr> 
-							<td width="24%"><b><?php echo $isian[3]; ?></b></td>  
-							<td width="2%"><b>:</b></td>  
-							<td width="74%"><input name="txt3" type="text" class="input-xxlarge" value="<?php echo $data[3]; ?>" size="60" maxlength="60"  /></td>  
-						</tr> 
-						<tr> 
-							<td width="24%"><b><?php echo $isian[4]; ?></b></td>  
-							<td width="2%"><b>:</b></td>  
-							<td width="74%"><input name="txt4" type="text" class="input-xxlarge" value="<?php echo $data[4]; ?>" size="60" maxlength="60"  /></td>  
-						</tr> 
-						<tr> 
-							<td width="24%"><b><?php echo $isian[5]; ?></b></td>  
-							<td width="2%"><b>:</b></td>  
-							<td width="74%"><input name="txt5" type="text" class="input-xxlarge" value="<?php echo $data[5]; ?>" size="60" maxlength="60"  /></td>  
-						</tr> 
-						<tr> 
-							<td width="24%"><b><?php echo $isian[6]; ?></b></td>  
-							<td width="2%"><b>:</b></td>  
-							<td width="74%"><input name="txt6" type="text" class="input-xxlarge" value="<?php echo $data[6]; ?>" size="60" maxlength="60"  /></td>  
-						</tr> 
+						<?php 
+							buatInputText($isian[3],3,$data[3]); 
+							buatInputText($isian[4],4,$data[4]); 	
+							buatInputText($isian[5],5,$data[5]); 	
+							buatInputText($isian[6],6,$data[6]); 							
+						?>
 						<tr> 
 						<td width="24%"><b><?php echo $isian[7]; ?></b></td>  
 						<td width="2%"><b>:</b></td>  

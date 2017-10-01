@@ -505,11 +505,7 @@ for($i=1;$i<=$jmlField;$i++){
 	fwrite($myfile, "				  <fieldset> \n");
 	fwrite($myfile, "					<table class=\"table table-striped\"> \n");
 for($i=3;$i<=$jmlField;$i++){
-	fwrite($myfile, "						<tr> \n");
-	fwrite($myfile, "							<td width=\"24%\"><b><?php echo \$isian[".$i."]; ?></b></td>  \n");
-	fwrite($myfile, "							<td width=\"2%\"><b>:</b></td>  \n");
-	fwrite($myfile, "							<td width=\"74%\"><input name=\"txt".$i."\" type=\"text\" class=\"input-xxlarge\" value=\"<?php echo \$data[".$i."]; ?>\" size=\"60\" maxlength=\"60\"  /></td>  \n");
-	fwrite($myfile, "						</tr> \n");
+	fwrite($myfile, "buatInputText(\$isian[$i],$i,\$data[$i]); \n");
 }
 	fwrite($myfile, "						<tr> \n");
 	fwrite($myfile, "							 <td>&nbsp;</td> \n");
@@ -620,5 +616,13 @@ function buatMenu($namaForm){
 	unlink($source);
 	// rename target file to source file
 	rename($target, $source);
+}
+
+function buatInputText($text,$i,$data){
+	echo("						<tr> \n");
+	echo("							<td width=\"24%\"><b>".$text."</b></td>  \n");
+	echo("							<td width=\"2%\"><b>:</b></td>  \n");
+	echo("							<td width=\"74%\"><input name=\"txt".$i."\" type=\"text\" class=\"input-xxlarge\" value=\"".$data."\" size=\"60\" maxlength=\"60\"  /></td>  \n");
+	echo("						</tr> \n");
 }
 ?>
