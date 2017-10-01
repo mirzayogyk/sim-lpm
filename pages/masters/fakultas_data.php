@@ -32,13 +32,13 @@ if($_GET) {
 				<h4 class="alert-heading">Error!</h4>'.$noPesan.'. '.$pesan_tampil.'</div><br>';	 
 			}  
 			echo "</div> <br>";  
-			buatLog($_SESSION['BONCLINK_M4SUK'],"INSERT FAIL",getStringArray($pesanError));
+			buatLog($_SESSION['USERMRZ'],"INSERT FAIL",getStringArray($pesanError));
 		} 
 		else { 
 			$mySql	= "INSERT INTO ".$tableName." ".getInsert($jmlField,$field,$txt); 
 			$myQry	= mysqli_query($koneksidb, $mySql) or die ("Gagal query insert :".getInsert($jmlField,$field,$txt)); 
 			if($myQry){ 
-				buatLog($_SESSION['BONCLINK_M4SUK'],"INSERT SUCCESS",$mySql);
+				buatLog($_SESSION['USERMRZ'],"INSERT SUCCESS",$mySql);
 				echo "<meta http-equiv='refresh' content='0; url=?page=".$formName."-Data'>"; 
 			} 
 			exit; 
@@ -135,7 +135,7 @@ $max	 = ceil($jml/$row);
 		<th width="10" colspan="2"><strong>Option</strong></td> 
 	</tr> 
 <?php 
-tampilTabel($pageQry,$tableName,$field,$formName,$hal,$row); 
+tampilTabel($koneksidb,$tableName,$field,$formName,$hal,$row); 
 ?> 
 </table> 
-<?php tabelFooter($jml,$row,$max,$formName) ?> 
+<?php tabelFooter($jml,$row,$max,$formName,$hal) ?>  

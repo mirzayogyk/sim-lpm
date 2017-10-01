@@ -61,7 +61,7 @@ if($_GET) {
 			if($loginQry){
 				if (mysqli_num_rows($loginQry) >=1) {
 					$loginData = mysqli_fetch_array($loginQry);
-					$_SESSION['BONCLINK_M4SUK'] = $loginData['username']; 
+					$_SESSION['USERMRZ'] = $loginData['username']; 
 					$_SESSION['APUCHE_HAHA'] = $loginData['password']; 
 					$_SESSION['ID_CRAB'] = $loginData['id_admin']; 
 					$_SESSION['NGARAN_SHARPSHOOT3R'] = $loginData['username']; 

@@ -314,12 +314,14 @@ function buatDelete($folderOutput, $namaForm, $namaTable){
 	fwrite($myfile, "\n");
 	fwrite($myfile, "if(\$_GET) { \n");
 	fwrite($myfile, "	if(empty(\$_GET['Kode'])){ \n");
+	fwrite($myfile, "		buatLog(\$_SESSION['USERMRZ'],\"DELETE FAIL\",\"NULL\"); \n");
 	fwrite($myfile, "		echo \"<b>Data yang dihapus tidak ada</b>\"; \n");
 	fwrite($myfile, "	} \n");
 	fwrite($myfile, "	else { \n");
 	fwrite($myfile, "		\$mySql = \"DELETE FROM \".\$tableName.\" WHERE \".\$field[0].\"='\".\$_GET['Kode'].\"'\"; \n");
 	fwrite($myfile, "		\$myQry = mysqli_query(\$koneksidb,\$mySql) or die (\"Eror hapus data\".mysql_error());  \n");
 	fwrite($myfile, "		if(\$myQry){  \n");
+	fwrite($myfile, "		buatLog(\$_SESSION['USERMRZ'],\"DELETE SUCCESS\",\$mySql); \n");
 	fwrite($myfile, "			echo \"<meta http-equiv='refresh' content='0; url=?page=\".\$formName.\"-Data'>\";  \n");
 	fwrite($myfile, "		} \n");
 	fwrite($myfile, "	} \n");
@@ -385,17 +387,25 @@ if($mode=="INSERT"){
 	fwrite($myfile, "				<h4 class=\"alert-heading\">Error!</h4>'.\$noPesan.'. '.\$pesan_tampil.'</div><br>';	 \n");
 	fwrite($myfile, "			}  \n");
 	fwrite($myfile, "			echo \"</div> <br>\";  \n");
+if($mode=="INSERT"){
+	fwrite($myfile, "			buatLog(\$_SESSION['USERMRZ'],\"INSERT FAIL\",getStringArray(\$pesanError));");
 	fwrite($myfile, "		} \n");
 	fwrite($myfile, "		else { \n");
-if($mode=="INSERT"){
 	fwrite($myfile, "			\$mySql	= \"INSERT INTO \".\$tableName.\" \".getInsert(\$jmlField,\$field,\$txt); \n");
-}else{
-	fwrite($myfile, "			\$mySql	= \"UPDATE \".\$tableName.\" SET \".getUpdate(\$jmlField,\$field,\$txt); \n");
-}	
-
 	fwrite($myfile, "			\$myQry	= mysqli_query(\$koneksidb, \$mySql) or die (\"Gagal query insert :\".getInsert(\$jmlField,\$field,\$txt)); \n");
 	fwrite($myfile, "			if(\$myQry){ \n");
+	fwrite($myfile, "			buatLog(\$_SESSION['USERMRZ'],\"INSERT SUCCESS\",\$mySql);");
+}else{
+	fwrite($myfile, "			buatLog(\$_SESSION['USERMRZ'],\"UPDATE FAIL\",getStringArray(\$pesanError));");
+	fwrite($myfile, "		} \n");
+	fwrite($myfile, "		else { \n");
+	fwrite($myfile, "			\$mySql	= \"UPDATE \".\$tableName.\" SET \".getUpdate(\$jmlField,\$field,\$txt); \n");
+	fwrite($myfile, "			\$myQry	= mysqli_query(\$koneksidb, \$mySql) or die (\"Gagal query update :\".\$mySql); \n");
+	fwrite($myfile, "			if(\$myQry){ \n");
+	fwrite($myfile, "			buatLog(\$_SESSION['USERMRZ'],\"UPDATE SUCCESS\",\$mySql);");
+}	
 	fwrite($myfile, "				echo \"<meta http-equiv='refresh' content='0; url=?page=\".\$formName.\"-Data'>\"; \n");
+
 	fwrite($myfile, "			} \n");
 	fwrite($myfile, "			exit; \n");
 	fwrite($myfile, "		} \n");

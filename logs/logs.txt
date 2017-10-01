@@ -19,6 +19,9 @@
 [2017-10-01 09:18:30pm][sudo][::1][INSERT FAIL][(Data <b>Kode Fakultas</b> tidak boleh kosong !, Data <b>Fakultas</b> tidak boleh kosong !, Data <b>Id Dekan</b> tidak boleh kosong !, Data <b>Nama Dekan</b> tidak boleh kosong !,  )]
 [2017-10-01 09:19:35pm][sudo][::1][DELETE SUCCESS][DELETE FROM tfakultas WHERE id='17']
 [2017-10-01 09:19:38pm][sudo][::1][INSERT FAIL][(Data <b>Kode Fakultas</b> tidak boleh kosong !, Data <b>Fakultas</b> tidak boleh kosong !, Data <b>Id Dekan</b> tidak boleh kosong !, Data <b>Nama Dekan</b> tidak boleh kosong ! )]
+[2017-10-02 12:56:39am][sudo][::1][LOGGED OUT][NULL]
+[2017-10-02 12:56:59am][sudo][::1][LOGGED IN][NULL]
+[2017-10-02 12:58:54am][sudo][::1][INSERT SUCCESS][INSERT INTO tfakultas (created_at, updated_at, kode_fakultas, fakultas, id_dekan, nama_dekan ) VALUES ('2017-10-02 12:58:54am', '', '1', '2', '3', '4')]
 #MARKER
 
 
