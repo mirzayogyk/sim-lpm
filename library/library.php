@@ -516,6 +516,7 @@ for($i=1;$i<=$jmlField;$i++){
 	fwrite($myfile, "					<table class=\"table table-striped\"> \n");
 for($i=3;$i<=$jmlField;$i++){
 	fwrite($myfile, "buatInputText(\$isian[$i],$i,\$data[$i]); \n");
+	fwrite($myfile, "//buatInputSelect(\$isian[7],7,\$data[7],\"tFakultas\",\$koneksidb,\"Fakultas\"); \n");
 }
 	fwrite($myfile, "						<tr> \n");
 	fwrite($myfile, "							 <td>&nbsp;</td> \n");
@@ -636,23 +637,20 @@ function buatInputText($text,$i,$data){
 	echo("						</tr> \n");
 }
 
-function buatInputSelect($text,$i,$data,$namaTable,$koneksidb,$orderby){
+function buatInputSelect($isian,$i,$data,$namaTable,$koneksidb,$orderby){
 	echo("						<tr> \n");
-	echo("							<td width=\"24%\"><b>".$text."</b></td>  \n");
+	echo("							<td width=\"24%\"><b>".$isian."</b></td>  \n");
 	echo("							<td width=\"2%\"><b>:</b></td>  \n");
 	echo("							<td width=\"74%\">
-										<select name=\"txt".$i."\" class=\"span4\">");
-	
-										$mySql = "SELECT * FROM ".$namaTable." ORDER BY ".$orderby." ASC";										
-										$myQry = mysqli_query($koneksidb, $mySql) or die ("Gagal Query ruangan  ".$mySql);
-										
-										while ($kolomData1 = mysqli_fetch_array($myQry)) {
-											if ($data == $kolomData1['id']) {
-												$cek = "selected";
-											} else { $cek=""; }
-											
-											echo "<option value='$kolomData1[id]' $cek>$kolomData1[4] </option>";
-										}
+										<select name=\"txt".$i."\" class=\"span4\">");	
+	$mySql = "SELECT * FROM ".$namaTable." ORDER BY ".$orderby." ASC";										
+	$myQry = mysqli_query($koneksidb, $mySql) or die ("Gagal Query ruangan  ".$mySql);										
+	while ($kolomData1 = mysqli_fetch_array($myQry)) {
+		if ($data == $kolomData1['id']) {
+			$cek = "selected";
+		} else { $cek=""; }											
+		echo "<option value='$kolomData1[id]' $cek>$kolomData1[4] </option>";
+	}
 	echo("								</select>
 									</td>  \n");
 	echo("						</tr> \n");
