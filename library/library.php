@@ -232,7 +232,7 @@ function getUpdate($jml,$field,$txt){
 }
 
 function getStringArray($pesanError){
-	$jml = count($pesanError);
+	$jml = count($pesanError)-1;
 	$s="(".$pesanError[0];
 	for($i=1;$i<=$jml;$i++){
 		$s = $s.", ".$pesanError[$i];
