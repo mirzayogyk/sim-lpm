@@ -59,7 +59,24 @@ if($_GET) {
 					if(!file_exists ('pages/masters/fakultas_delete.php')) die ($nopage); 
 					include 'pages/masters/fakultas_delete.php'; break;
   						
-					#MARKER 					
+ 
+			case 'Prodi-Data' :			
+			if(!file_exists ('pages/masters/prodi_data.php')) include "pages/404.php"; 
+			include 'pages/masters/prodi_data.php'; break;
+  
+			case 'Prodi-Edit' :		
+			if(!file_exists ('pages/masters/prodi_edit.php')) include "pages/404.php"; 
+			include 'pages/masters/prodi_edit.php'; break;
+  
+			case 'Prodi-Delete' :			
+			if(!file_exists ('pages/masters/prodi_delete.php')) include "pages/404.php"; 
+			include 'pages/masters/prodi_delete.php'; break;
+  						
+			#MARKER 
+
+			
+
+			
 	}
 }
 else {

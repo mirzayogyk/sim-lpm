@@ -654,7 +654,7 @@ for($i=1;$i<=$jmlField;$i++){
   	fwrite($myfile, "<?php tabelFooter(\$jml,\$row,\$max,\$formName) ?> \n");
 }
 
-function editBukafile($namaForm){
+function editBukafile($folderOutput, $namaForm){
 	$source="layouts/buka_file.php";
 	$target="layouts/buka_file_backup.php";
 	// copy operation
@@ -672,7 +672,7 @@ function editBukafile($namaForm){
 			if(!file_exists ('".$folderOutput."/".$namaFile."_edit.php')) include \"pages/404.php\"; 
 			include '".$folderOutput."/".$namaFile."_edit.php'; break;\n  
 			case '".$namaForm."-Delete' :			
-			if(!file_exists ('".$folderOutput."/".$namaFile."_delete.php')) dinclude \"pages/404.php\"; 
+			if(!file_exists ('".$folderOutput."/".$namaFile."_delete.php')) include \"pages/404.php\"; 
 			include '".$folderOutput."/".$namaFile."_delete.php'; break;\n  						
 			#MARKER \n
 			" . PHP_EOL;
@@ -696,9 +696,31 @@ function buatLog($user, $activity, $data){
 	while (!feof($sh)) {
 		$line=fgets($sh);
 		if (strpos($line, '#MARKER')!==false) {
-		 $line="
-		 [".date("Y-m-d h:i:sa")."][".$user."][".$ippengguna."][".$activity."][".$data."]
-		 #MARKER". PHP_EOL;
+		 $line="[".date("Y-m-d h:i:sa")."][".$user."][".$ippengguna."][".$activity."][".$data."]
+#MARKER". PHP_EOL;
+		}
+		fwrite($th, $line);
+	}
+
+	fclose($sh);
+	fclose($th);
+	// delete old source file
+	unlink($source);
+	// rename target file to source file
+	rename($target, $source);
+}
+
+function buatMenu($namaForm){
+	$source="layouts/partials/navlist.php";
+	$target="layouts/partials/navlist_backup.php";
+	$sh=fopen($source, "r");
+	$th=fopen($target, "w");
+	$ippengguna=$_SERVER['REMOTE_ADDR'];
+	while (!feof($sh)) {
+		$line=fgets($sh);
+		if (strpos($line, '<!-- MARKER -->')!==false) {
+		 $line="<li><a href=\"?page=".$namaForm."-Data\">Data ".$namaForm."</a> </li>
+<!-- MARKER -->". PHP_EOL;
 		}
 		fwrite($th, $line);
 	}

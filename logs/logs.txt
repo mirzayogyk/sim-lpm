@@ -4,7 +4,15 @@
 
 [2017-09-11 06:43:24pm][sudo][::1][LOGGED IN][NULL]    
  
-#MARKER 
+[2017-09-11 06:47:20pm][sudo][::1][LOGGED OUT][NULL]
+[2017-09-11 06:47:40pm][sudo][::1][LOGGED IN][NULL]
+[2017-09-11 06:49:05pm][sudo][::1][LOGGED OUT][NULL]
+[2017-09-11 06:49:38pm][sudo][::1][LOGGED IN][NULL]
+[2017-09-11 06:50:12pm][sudo][::1][LOGGED OUT][NULL]
+[2017-09-11 06:51:11pm][sudo][::1][LOGGED IN][NULL]
+[2017-09-19 06:02:41am][sudo][::1][LOGGED IN][NULL]
+[2017-10-01 08:07:56am][sudo][::1][LOGGED IN][NULL]
+#MARKER
 
 
 

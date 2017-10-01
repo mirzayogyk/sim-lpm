@@ -40,7 +40,8 @@
 				buatDelete($folderOutput, $namaForm, $namaTable);
 				buatData($folderOutput, $namaForm, $namaTable,$jmlField);
 				buatEdit($folderOutput, $namaForm, $namaTable,$jmlField);
-				editBukafile($namaForm);
+				editBukafile($folderOutput, $namaForm);
+				buatMenu($namaForm);
 			}
 		}
 	}	
