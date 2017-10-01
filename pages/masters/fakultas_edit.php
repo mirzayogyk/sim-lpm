@@ -32,14 +32,14 @@ if($_GET) {
 				<h4 class="alert-heading">Error!</h4>'.$noPesan.'. '.$pesan_tampil.'</div><br>';	 
 			}  
 			echo "</div> <br>";  
-			buatLog($_SESSION['USERMRZ'],"UPDATE FAIL",getStringArray($pesanError));		
+			buatLog($_SESSION['USERMRZ'],"UPDATE FAIL",getStringArray($pesanError)); 
 		} 
 		else { 
 			$mySql	= "UPDATE ".$tableName." SET ".getUpdate($jmlField,$field,$txt); 
 			$myQry	= mysqli_query($koneksidb, $mySql) or die ("Gagal query update :".$mySql); 
 			if($myQry){ 
-			buatLog($_SESSION['USERMRZ'],"UPDATE SUCCESS",$mySql);				
-			echo "<meta http-equiv='refresh' content='0; url=?page=".$formName."-Data'>"; 
+			buatLog($_SESSION['USERMRZ'],"UPDATE SUCCESS",$mySql); 
+				echo "<meta http-equiv='refresh' content='0; url=?page=".$formName."-Data'>"; 
 			} 
 			exit; 
 		} 

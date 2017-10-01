@@ -32,14 +32,14 @@ if($_GET) {
 				<h4 class="alert-heading">Error!</h4>'.$noPesan.'. '.$pesan_tampil.'</div><br>';	 
 			}  
 			echo "</div> <br>";  
-			buatLog($_SESSION['USERMRZ'],"INSERT FAIL",getStringArray($pesanError));		
+			buatLog($_SESSION['USERMRZ'],"INSERT FAIL",getStringArray($pesanError)); 
 		} 
 		else { 
 			$mySql	= "INSERT INTO ".$tableName." ".getInsert($jmlField,$field,$txt); 
 			$myQry	= mysqli_query($koneksidb, $mySql) or die ("Gagal query insert :".getInsert($jmlField,$field,$txt)); 
 			if($myQry){ 
-			buatLog($_SESSION['USERMRZ'],"INSERT SUCCESS",$mySql);				
-			echo "<meta http-equiv='refresh' content='0; url=?page=".$formName."-Data'>"; 
+			buatLog($_SESSION['USERMRZ'],"INSERT SUCCESS",$mySql); 
+				echo "<meta http-equiv='refresh' content='0; url=?page=".$formName."-Data'>"; 
 			} 
 			exit; 
 		} 
@@ -55,7 +55,8 @@ if($_GET) {
 } 
 $row = 20; 
 $hal = isset($_GET['hal']) ? $_GET['hal'] : 0; 
-$pageSql = "SELECT $tableName.* FROM ".$tableName;  
+$pageSql = "SELECT $tableName.* FROM ".$tableName; 
+ 
 if(isset($_POST['qcari'])){ 
   $qcari=$_POST['qcari']; 
   $pageSql="SELECT $tableName.* FROM ".$tableName." WHERE  (".$field[4]." like '%$qcari%')"; 

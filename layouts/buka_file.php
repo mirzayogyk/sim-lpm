@@ -46,6 +46,7 @@ if($_GET) {
 		case 'Logout' :				
 			if(!file_exists ("pages/login_out.php")) die ("Sorry Empty Page!"); 
 			include "pages/login_out.php"; break;		
+  						
  
 			case 'Fakultas-Data' :			
 			if(!file_exists ('pages/masters/fakultas_data.php')) include "pages/404.php"; 
@@ -60,6 +61,8 @@ if($_GET) {
 			include 'pages/masters/fakultas_delete.php'; break;
   						
 			#MARKER 
+
+			
 
 			
 

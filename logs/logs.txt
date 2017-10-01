@@ -28,6 +28,10 @@
 [2017-10-02 01:55:06am][sudo][::1][DELETE SUCCESS][DELETE FROM tfakultas WHERE id='19']
 [2017-10-02 02:13:51am][admin][::1][LOGGED OUT][NULL]
 [2017-10-02 02:14:03am][sudo][::1][LOGGED IN][NULL]
+[2017-10-02 02:27:42am][sudo][::1][INSERT FAIL][(Maaf, Kode Fakultas <b> FTI </b> Sudah Ada. )]
+[2017-10-02 02:28:09am][sudo][::1][UPDATE SUCCESS][UPDATE tfakultas SET updated_at='2017-10-02 02:28:09am', kode_fakultas='FTI', fakultas='TEKNOLOGI INFORMASI1', id_dekan='-', nama_dekan='-' WHERE id='8']
+[2017-10-02 02:28:19am][sudo][::1][UPDATE SUCCESS][UPDATE tfakultas SET updated_at='2017-10-02 02:28:19am', kode_fakultas='FTI1', fakultas='TEKNOLOGI INFORMASI', id_dekan='2', nama_dekan='3' WHERE id='8']
+[2017-10-02 02:28:27am][sudo][::1][UPDATE SUCCESS][UPDATE tfakultas SET updated_at='2017-10-02 02:28:27am', kode_fakultas='FTI', fakultas='TEKNOLOGI INFORMASI', id_dekan='-', nama_dekan='-' WHERE id='8']
 #MARKER
 
 
