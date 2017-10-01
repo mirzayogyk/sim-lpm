@@ -174,8 +174,8 @@ function buatTombol($formName,$Kode,$kolom){
 	echo("<td class=\"cc\" align=\"center\"><a href=\"?page=". $formName."-Delete&Kode=".$Kode." \" onclick=\"return confirm('Anda Yakin menghapus Data ".$formName." dengan Nama ".$kolom."? ')\"><i class=\"icon-trash\"></i></a></td>");
 }
 
-function tampilTabel($koneksidb,$tableName,$field,$formName,$hal,$row){
-	$mySql = "SELECT $tableName.* FROM ".$tableName." ORDER BY ".$field[4]." ASC LIMIT $hal, $row";
+function tampilTabel($koneksidb,$pageSql,$field,$formName,$hal,$row){
+	$mySql = $pageSql." ORDER BY ".$field[4]." ASC LIMIT $hal, $row";
 	$myQry = mysqli_query($koneksidb, $mySql)  or die ("Query salah : ".$mySql);
 	$nomor  = 1+$hal; 
 	while ($kolomData = mysqli_fetch_array($myQry)) {
@@ -388,21 +388,21 @@ if($mode=="INSERT"){
 	fwrite($myfile, "			}  \n");
 	fwrite($myfile, "			echo \"</div> <br>\";  \n");
 if($mode=="INSERT"){
-	fwrite($myfile, "			buatLog(\$_SESSION['USERMRZ'],\"INSERT FAIL\",getStringArray(\$pesanError));");
+	fwrite($myfile, "			buatLog(\$_SESSION['USERMRZ'],\"INSERT FAIL\",getStringArray(\$pesanError)); \n");
 	fwrite($myfile, "		} \n");
 	fwrite($myfile, "		else { \n");
 	fwrite($myfile, "			\$mySql	= \"INSERT INTO \".\$tableName.\" \".getInsert(\$jmlField,\$field,\$txt); \n");
 	fwrite($myfile, "			\$myQry	= mysqli_query(\$koneksidb, \$mySql) or die (\"Gagal query insert :\".getInsert(\$jmlField,\$field,\$txt)); \n");
 	fwrite($myfile, "			if(\$myQry){ \n");
-	fwrite($myfile, "			buatLog(\$_SESSION['USERMRZ'],\"INSERT SUCCESS\",\$mySql);");
+	fwrite($myfile, "			buatLog(\$_SESSION['USERMRZ'],\"INSERT SUCCESS\",\$mySql); \n");
 }else{
-	fwrite($myfile, "			buatLog(\$_SESSION['USERMRZ'],\"UPDATE FAIL\",getStringArray(\$pesanError));");
+	fwrite($myfile, "			buatLog(\$_SESSION['USERMRZ'],\"UPDATE FAIL\",getStringArray(\$pesanError)); \n");
 	fwrite($myfile, "		} \n");
 	fwrite($myfile, "		else { \n");
 	fwrite($myfile, "			\$mySql	= \"UPDATE \".\$tableName.\" SET \".getUpdate(\$jmlField,\$field,\$txt); \n");
 	fwrite($myfile, "			\$myQry	= mysqli_query(\$koneksidb, \$mySql) or die (\"Gagal query update :\".\$mySql); \n");
 	fwrite($myfile, "			if(\$myQry){ \n");
-	fwrite($myfile, "			buatLog(\$_SESSION['USERMRZ'],\"UPDATE SUCCESS\",\$mySql);");
+	fwrite($myfile, "			buatLog(\$_SESSION['USERMRZ'],\"UPDATE SUCCESS\",\$mySql); \n");
 }	
 	fwrite($myfile, "				echo \"<meta http-equiv='refresh' content='0; url=?page=\".\$formName.\"-Data'>\"; \n");
 
@@ -477,11 +477,11 @@ for($i=1;$i<=$jmlField;$i++){
 
 	fwrite($myfile, "\$row = 20; \n");
 	fwrite($myfile, "\$hal = isset(\$_GET['hal']) ? \$_GET['hal'] : 0; \n");
-	fwrite($myfile, "\$pageSql = \"SELECT \$tableName.* FROM \".\$tableName.\" ORDER BY \".\$field[1].\" ASC \"; ");
+	fwrite($myfile, "\$pageSql = \"SELECT \$tableName.* FROM \".\$tableName; \n");
 	fwrite($myfile, " \n");
 	fwrite($myfile, "if(isset(\$_POST['qcari'])){ \n");
 	fwrite($myfile, "  \$qcari=\$_POST['qcari']; \n");
-	fwrite($myfile, "  \$pageSql=\"SELECT \$tableName.* FROM \".\$tableName.\" WHERE  (\".\$field[4].\" like '%\$qcari%') ORDER BY \".\$field[4].\" \"; \n");
+	fwrite($myfile, "  \$pageSql=\"SELECT \$tableName.* FROM \".\$tableName.\" WHERE  (\".\$field[4].\" like '%\$qcari%')\"; \n");
 	fwrite($myfile, "} \n");
 	fwrite($myfile, " \n");
 	fwrite($myfile, "\$pageQry = mysqli_query(\$koneksidb, \$pageSql) or die (\"error paging: \".\$pageSql); \n");
@@ -546,7 +546,7 @@ for($i=3;$i<=$jmlField;$i++){
 
 	fwrite($myfile, "	</tr> \n");
 	fwrite($myfile, "<?php \n");
-	fwrite($myfile, "tampilTabel(\$koneksidb,\$tableName,\$field,\$formName,\$hal,\$row); \n");
+	fwrite($myfile, "tampilTabel(\$koneksidb,\$pageSql,\$field,\$formName,\$hal,\$row); \n");
 	fwrite($myfile, "?> \n");
 	fwrite($myfile, "</table> \n");
   	fwrite($myfile, "<?php tabelFooter(\$jml,\$row,\$max,\$formName,\$hal) ?> \n");

@@ -23,6 +23,11 @@
 [2017-10-02 12:56:59am][sudo][::1][LOGGED IN][NULL]
 [2017-10-02 12:58:54am][sudo][::1][INSERT SUCCESS][INSERT INTO tfakultas (created_at, updated_at, kode_fakultas, fakultas, id_dekan, nama_dekan ) VALUES ('2017-10-02 12:58:54am', '', '1', '2', '3', '4')]
 [2017-10-02 01:40:39am][sudo][::1][DELETE SUCCESS][DELETE FROM tfakultas WHERE id='18']
+[2017-10-02 01:54:02am][sudo][::1][INSERT SUCCESS][INSERT INTO tfakultas (created_at, updated_at, kode_fakultas, fakultas, id_dekan, nama_dekan ) VALUES ('2017-10-02 01:54:02am', '', '1', '2', '3', '4')]
+[2017-10-02 01:54:25am][sudo][::1][UPDATE SUCCESS][UPDATE tfakultas SET updated_at='2017-10-02 01:54:24am', kode_fakultas='2', fakultas='3', id_dekan='4', nama_dekan='5' WHERE id='19']
+[2017-10-02 01:55:06am][sudo][::1][DELETE SUCCESS][DELETE FROM tfakultas WHERE id='19']
+[2017-10-02 02:13:51am][admin][::1][LOGGED OUT][NULL]
+[2017-10-02 02:14:03am][sudo][::1][LOGGED IN][NULL]
 #MARKER
 
 
