@@ -10,6 +10,7 @@ if($_GET) {
 		$txt[4] = $_POST['txt4']; 
 		$txt[5] = $_POST['txt5']; 
 		$txt[6] = $_POST['txt6']; 
+		$txt[7] = $_POST['txt7']; 
  
 		$pesanError = array(); 
 		for($i=3;$i<=$jmlField;$i++){ 
@@ -50,6 +51,7 @@ if($_GET) {
 	$data[4]	= isset($_POST['txt4']) ? $_POST['txt4'] : ''; 
 	$data[5]	= isset($_POST['txt5']) ? $_POST['txt5'] : ''; 
 	$data[6]	= isset($_POST['txt6']) ? $_POST['txt6'] : ''; 
+	$data[7]	= isset($_POST['txt7']) ? $_POST['txt7'] : ''; 
 } 
 $row = 20; 
 $hal = isset($_GET['hal']) ? $_GET['hal'] : 0; 
@@ -106,21 +108,26 @@ $max	 = ceil($jml/$row);
 						<tr> 
 							<td width="24%"><b><?php echo $isian[6]; ?></b></td>  
 							<td width="2%"><b>:</b></td>  
-							<td width="74%"><select name="txt6" class="span4"> 
-									<?php
-									$mySql2 = "SELECT * FROM tfakultas ORDER BY fakultas ASC";
-									$myQry = mysqli_query($koneksidb, $mySql2) or die ("Gagal Query ruangan  ".mysqli_error($koneksidb));
-									while ($kolomData1 = mysqli_fetch_array($myQry)) {
-										if ($data[6] == $kolomData1['id']) {
-											$cek = "selected";
-										} else { $cek=""; }
-										
-										echo "<option value='$kolomData1[id]' $cek> $kolomData1[fakultas] </option>";
-									}
-									$mySql ="";
-									?>
-									</select></td>  
+							<td width="74%"><input name="txt6" type="text" class="input-xxlarge" value="<?php echo $data[6]; ?>" size="60" maxlength="60"  /></td>  
 						</tr> 
+						<tr> 
+						<td width="24%"><b><?php echo $isian[7]; ?></b></td>  
+						<td width="2%"><b>:</b></td>  
+						<td width="74%"><select name="txt7" class="span4"> 
+								<?php
+								$mySql2 = "SELECT * FROM tfakultas ORDER BY fakultas ASC";
+								$myQry = mysqli_query($koneksidb, $mySql2) or die ("Gagal Query ruangan  ".mysqli_error($koneksidb));
+								while ($kolomData1 = mysqli_fetch_array($myQry)) {
+									if ($data[7] == $kolomData1['id']) {
+										$cek = "selected";
+									} else { $cek=""; }
+									
+									echo "<option value='$kolomData1[id]' $cek> $kolomData1[fakultas] </option>";
+								}
+								$mySql ="";
+								?>
+								</select></td>  
+					</tr> 
 						<tr> 
 							 <td>&nbsp;</td> 
 							 <td>&nbsp;</td> 
@@ -143,6 +150,7 @@ $max	 = ceil($jml/$row);
 		<th><strong><?php echo $isian[4]; ?></strong></th> 
 		<th><strong><?php echo $isian[5]; ?></strong></th> 
 		<th><strong><?php echo $isian[6]; ?></strong></th> 
+		<th><strong><?php echo $isian[7]; ?></strong></th> 
 		<th width="10" colspan="2"><strong>Option</strong></td> 
 	</tr> 
 <?php 

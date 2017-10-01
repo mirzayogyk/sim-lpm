@@ -10,6 +10,7 @@ if($_GET) {
 		$txt[4] = $_POST['txt4']; 
 		$txt[5] = $_POST['txt5']; 
 		$txt[6] = $_POST['txt6']; 
+		$txt[7] = $_POST['txt7']; 
  
 		$pesanError = array(); 
 		for($i=3;$i<=$jmlField;$i++){ 
@@ -85,6 +86,12 @@ for($i=0;$i<=$jmlField;$i++){
 			<label class="control-label" for="input06"><?php echo $isian[6]; ?></label>  
 			<div class="controls">  
 				<input name="txt6" type="text" class="input-xlarge" id="input06" value="<?php echo $data[6]; ?>"  size="60" maxlength="50" />  
+			</div> 
+		</div> 
+		<div class="control-group"> 
+			<label class="control-label" for="input07"><?php echo $isian[7]; ?></label>  
+			<div class="controls">  
+				<input name="txt7" type="text" class="input-xlarge" id="input07" value="<?php echo $data[7]; ?>"  size="60" maxlength="50" />  
 			</div> 
 		</div> 
 <div class="form-actions"> 
