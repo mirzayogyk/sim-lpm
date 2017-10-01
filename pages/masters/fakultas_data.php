@@ -32,11 +32,13 @@ if($_GET) {
 				<h4 class="alert-heading">Error!</h4>'.$noPesan.'. '.$pesan_tampil.'</div><br>';	 
 			}  
 			echo "</div> <br>";  
+			buatLog($_SESSION['BONCLINK_M4SUK'],"INSERT FAIL",$pesanError);
 		} 
 		else { 
 			$mySql	= "INSERT INTO ".$tableName." ".getInsert($jmlField,$field,$txt); 
 			$myQry	= mysqli_query($koneksidb, $mySql) or die ("Gagal query insert :".getInsert($jmlField,$field,$txt)); 
 			if($myQry){ 
+				buatLog($_SESSION['BONCLINK_M4SUK'],"INSERT SUCCESS",$mySql);
 				echo "<meta http-equiv='refresh' content='0; url=?page=".$formName."-Data'>"; 
 			} 
 			exit; 

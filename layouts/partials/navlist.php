@@ -6,7 +6,6 @@
 		  <ul>
         <li><a href="?page=Fakultas-Data">Data Fakultas</a> </li>
         <li><a href="?page=Prodi-Data">Data Prodi</a> </li>
-<li><a href="?page=Prodi-Data">Data Prodi</a> </li>
 <!-- MARKER -->
         <li><a href="?page=Ruangan-Data">Data Ruangan</a></li> 
         <li><a href="?page=Kondisi-Data">Data Kondisi</a></li> 
