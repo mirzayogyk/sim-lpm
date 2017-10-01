@@ -55,7 +55,7 @@ if($_GET) {
 } 
 $row = 20; 
 $hal = isset($_GET['hal']) ? $_GET['hal'] : 0; 
-$pageSql = "SELECT $tableName.* FROM ".$tableName; 
+$pageSql = "SELECT $tableName.* FROM ".$tableName." ORDER BY ".$field[1]." ASC LIMIT $hal, $row"; 
  
 if(isset($_POST['qcari'])){ 
   $qcari=$_POST['qcari']; 
@@ -157,4 +157,4 @@ $max	 = ceil($jml/$row);
 tampilTabel($pageQry,$tableName,$field,$formName,$hal,$row); 
 ?> 
 </table> 
-<?php tabelFooter($jml,$row,$max,$formName) ?> 
+<?php tabelFooter($jml,$row,$max,$formName,$hal) ?> 

@@ -194,14 +194,22 @@ function tampilTabel($koneksidb,$tableName,$field,$formName,$hal,$row){
 	}
 }
 
-function tabelFooter($jml,$row,$max,$formName){
+function tabelFooter($jml,$row,$max,$formName,$hal){
 	echo("<table class=\"table table-bordered table-striped\">");
-	echo("<tr><td><strong>Jumlah Data :</strong> ".$jml."</td>
-	<td align=\"right\"><b>Halaman ke :</b> ");	
-	for ($h = 1; $h <= $max; $h++) {
-	$list[$h] = $row * $h - $row;
-	echo " <a href='?page=".$formName."-Data&hal=$list[$h]'>$h</a> ";
-	}
+	echo("<tr><td><div class =\"pagination\"><ul><li>");
+	echo("	<a href=\"?page=");
+			$g = $hal-1;
+			if ($g<=0)
+				{$g=0;}	
+	echo ($formName."-Data&hal=$g\">Prev</a>");
+	echo("</li>");
+
+	  for ($h = 1; $h <= $max;$h++) {
+		  $list[$h] = $row * $h - $row;
+		  echo " <li><a href='?page=".$formName."-Data&hal=".$list[$h]."'>$h</a></li> ";
+	  }
+
+	echo("</ul></div>");
 	echo "	</td> </tr> 	</table>";
 }
 
@@ -459,7 +467,7 @@ for($i=1;$i<=$jmlField;$i++){
 
 	fwrite($myfile, "\$row = 20; \n");
 	fwrite($myfile, "\$hal = isset(\$_GET['hal']) ? \$_GET['hal'] : 0; \n");
-	fwrite($myfile, "\$pageSql = \"SELECT \$tableName.* FROM \".\$tableName; \n");
+	fwrite($myfile, "\$pageSql = \"SELECT \$tableName.* FROM \".\$tableName.\" ORDER BY \".\$field[1].\" ASC LIMIT \$hal, \$row\"; ");
 	fwrite($myfile, " \n");
 	fwrite($myfile, "if(isset(\$_POST['qcari'])){ \n");
 	fwrite($myfile, "  \$qcari=\$_POST['qcari']; \n");
@@ -532,7 +540,7 @@ for($i=3;$i<=$jmlField;$i++){
 	fwrite($myfile, "tampilTabel(\$pageQry,\$tableName,\$field,\$formName,\$hal,\$row); \n");
 	fwrite($myfile, "?> \n");
 	fwrite($myfile, "</table> \n");
-  	fwrite($myfile, "<?php tabelFooter(\$jml,\$row,\$max,\$formName) ?> \n");
+  	fwrite($myfile, "<?php tabelFooter(\$jml,\$row,\$max,\$formName,\$hal) ?> \n");
 }
 function buatData1($folderOutput, $namaForm, $namaTable,$jmlField){
 	$namaFile = strtolower($namaForm);
@@ -662,7 +670,7 @@ for($i=1;$i<=$jmlField;$i++){
 	fwrite($myfile, "tampilTabel(\$pageQry,\$tableName,\$field,\$formName,\$hal,\$row); \n");
 	fwrite($myfile, "?> \n");
 	fwrite($myfile, "</table> \n");
-  	fwrite($myfile, "<?php tabelFooter(\$jml,\$row,\$max,\$formName) ?> \n");
+  	fwrite($myfile, "<?php tabelFooter(\$jml,\$row,\$max,\$formName,\$hal) ?> \n");
 }
 
 function editBukafile($folderOutput, $namaForm){
