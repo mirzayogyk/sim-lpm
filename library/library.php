@@ -514,10 +514,12 @@ for($i=1;$i<=$jmlField;$i++){
 	fwrite($myfile, "			  <form id=\"new-project\" class=\"form-horizontal \" action=\"?page=<?php echo \$formName;?>-Data\" method=\"post\" name=\"form1\" target=\"_self\"> \n");
 	fwrite($myfile, "				  <fieldset> \n");
 	fwrite($myfile, "					<table class=\"table table-striped\"> \n");
+	fwrite($myfile, "						<?php \n");
 for($i=3;$i<=$jmlField;$i++){
-	fwrite($myfile, "buatInputText(\$isian[$i],$i,\$data[$i]); \n");
-	fwrite($myfile, "//buatInputSelect(\$isian[7],7,\$data[7],\"tFakultas\",\$koneksidb,\"Fakultas\"); \n");
+	fwrite($myfile, "							buatInputText(\$isian[$i],$i,\$data[$i]); \n");	
 }
+	fwrite($myfile, "							//buatInputSelect(\$isian[7],7,\$data[7],\"tFakultas\",\$koneksidb,\"Fakultas\"); \n");
+	fwrite($myfile, "						?> \n");
 	fwrite($myfile, "						<tr> \n");
 	fwrite($myfile, "							 <td>&nbsp;</td> \n");
 	fwrite($myfile, "							 <td>&nbsp;</td> \n");
