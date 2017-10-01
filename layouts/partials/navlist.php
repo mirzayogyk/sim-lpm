@@ -4,10 +4,9 @@
     <li class="active"><a href="?page=Home"><i class="icon icon-home"></i> <span>Beranda</span></a></li>
     <li> <a href="#"><i class="icon icon-hdd"></i> <span>Master Data</span></a> 
 		  <ul>
+<li><a href="?page=Fakultas-Data">Data Fakultas</a> </li>
+<li><a href="?page=Fakultas-Data">Data Fakultas</a> </li>
 <!-- MARKER -->
-        <li><a href="?page=Ruangan-Data">Data Ruangan</a></li> 
-        <li><a href="?page=Kondisi-Data">Data Kondisi</a></li> 
-        <li><a href="?page=Tertanda-Data">Data Tanda Tangan</a></li>  
 		  </ul>
 	 </li> 
 	 <li> <a href="?page=Barang-Data"><i class="icon icon-tasks"></i> <span>Data Barang</span> </a>  </li>
