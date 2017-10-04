@@ -194,6 +194,8 @@ function tampilTabel($koneksidb,$pageSql,$field,$formName,$hal,$row){
 	}
 }
 
+
+
 function tabelFooter($jml,$row,$max,$formName,$hal){
 	$max=ceil($jml/$row);
 	echo("<table class=\"table table-bordered table-striped\">");

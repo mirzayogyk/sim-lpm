@@ -57,7 +57,16 @@ if($_GET) {
 } 
 $row = 20; 
 $hal = isset($_GET['hal']) ? $_GET['hal'] : 0; 
-$pageSql = "SELECT $tableName.*, tfakultas.* FROM ".$tableName.", tfakultas WHERE $tableName.id_fakultas = tfakultas.id"; 
+$pageSql = "SELECT $tableName.* FROM ".$tableName; 
+$pageSql2 = "SELECT $tableName.id,
+					$tableName.created_at,
+					$tableName.updated_at,
+					$tableName.kode_prodi,
+					$tableName.program_studi,
+					$tableName.id_kaprodi,
+					$tableName.ketua_prodi,
+					$tableName.id_fakultas,					
+					 tfakultas.id,tfakultas.fakultas FROM ".$tableName.", tfakultas WHERE $tableName.id_fakultas = tfakultas.id"; 
  
 if(isset($_POST['qcari'])){ 
   $qcari=$_POST['qcari']; 
