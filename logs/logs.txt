@@ -73,6 +73,7 @@
 [2017-10-05 06:54:05am][sudo][::1][DELETE SUCCESS][DELETE FROM tprodi WHERE id='30']
 [2017-10-05 06:54:07am][sudo][::1][DELETE SUCCESS][DELETE FROM tprodi WHERE id='40']
 [2017-10-05 06:54:11am][sudo][::1][DELETE SUCCESS][DELETE FROM tprodi WHERE id='41']
+[2017-10-05 07:11:16am][sudo][::1][INSERT FAIL][(Data <b>Tanggal Mulai</b> tidak boleh kosong !, Data <b>Tanggal Selesai</b> tidak boleh kosong ! )]
 #MARKER
 
 

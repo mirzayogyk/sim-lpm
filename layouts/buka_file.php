@@ -73,7 +73,22 @@ if($_GET) {
 			if(!file_exists ('pages/masters/prodi_delete.php')) include "pages/404.php"; 
 			include 'pages/masters/prodi_delete.php'; break;
   						
+ 
+			case 'Tahun-Data' :			
+			if(!file_exists ('pages/masters/tahun_data.php')) include "pages/404.php"; 
+			include 'pages/masters/tahun_data.php'; break;
+  
+			case 'Tahun-Edit' :		
+			if(!file_exists ('pages/masters/tahun_edit.php')) include "pages/404.php"; 
+			include 'pages/masters/tahun_edit.php'; break;
+  
+			case 'Tahun-Delete' :			
+			if(!file_exists ('pages/masters/tahun_delete.php')) include "pages/404.php"; 
+			include 'pages/masters/tahun_delete.php'; break;
+  						
 			#MARKER 
+
+			
 
 			
 

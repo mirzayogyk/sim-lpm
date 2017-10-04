@@ -332,16 +332,6 @@ function buatDelete($folderOutput, $namaForm, $namaTable){
 	fclose($myfile);
 }
 
-function buatInput($jmlField,$isian,$data){
-	for($i=1;$i<=$jmlField-1;$i++){
-		echo "<tr>";
-		echo "<td width=\"24%\"><b>".$isian[$i]."</b></td> ";
-		echo "<td width=\"2%\"><b>:</b></td> ";
-		echo "<td width=\"74%\"><input name=\"txt1\" type=\"text\" class=\"input-xxlarge\" value=\"".$data[$i]."\" size=\"60\" maxlength=\"60\"  /></td> ";
-		echo "</tr>";
-	}
-}
-
 function buatBtnSave($myfile,$namaFile,$jmlField,$mode){
 	fwrite($myfile, "<?php \n");
 	fwrite($myfile, "include_once \"library/seslogin.php\"; \n");
@@ -633,11 +623,29 @@ function buatMenu($namaForm){
 	rename($target, $source);
 }
 
+function buatInput($jmlField,$isian,$data){
+	for($i=1;$i<=$jmlField-1;$i++){
+		echo "<tr>";
+		echo "<td width=\"24%\"><b>".$isian[$i]."</b></td> ";
+		echo "<td width=\"2%\"><b>:</b></td> ";
+		echo "<td width=\"74%\"><input name=\"txt1\" type=\"text\" class=\"input-xxlarge\" value=\"".$data[$i]."\" size=\"60\" maxlength=\"60\"  /></td> ";
+		echo "</tr>";
+	}
+}
+
 function buatInputText($text,$i,$data){
 	echo("						<tr> \n");
 	echo("							<td width=\"24%\"><b>".$text."</b></td>  \n");
 	echo("							<td width=\"2%\"><b>:</b></td>  \n");
 	echo("							<td width=\"74%\"><input name=\"txt".$i."\" type=\"text\" class=\"input-xxlarge\" value=\"".$data."\" size=\"60\" maxlength=\"60\"  /></td>  \n");
+	echo("						</tr> \n");
+}
+
+function buatInputTanggal($text,$i,$data){
+	echo("						<tr> \n");
+	echo("							<td width=\"24%\"><b>".$text."</b></td>  \n");
+	echo("							<td width=\"2%\"><b>:</b></td>  \n");
+	echo("							<td width=\"74%\"><input name=\"txt".$i."\" type=\"date\" class=\"input-xxlarge\" value=\"".$data."\" size=\"60\" maxlength=\"60\"  /></td>  \n");
 	echo("						</tr> \n");
 }
 
