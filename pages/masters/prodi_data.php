@@ -71,6 +71,15 @@ $pageSql2 = "SELECT $tableName.id,
 if(isset($_POST['qcari'])){ 
   $qcari=$_POST['qcari']; 
   $pageSql="SELECT $tableName.* FROM ".$tableName." WHERE  (".$field[4]." like '%$qcari%')"; 
+  $pageSql2="SELECT $tableName.id,
+					$tableName.created_at,
+					$tableName.updated_at,
+					$tableName.kode_prodi,
+					$tableName.program_studi,
+					$tableName.id_kaprodi,
+					$tableName.ketua_prodi,
+					$tableName.id_fakultas,					
+					tfakultas.id,tfakultas.fakultas FROM ".$tableName.", tfakultas WHERE $tableName.id_fakultas = tfakultas.id AND  (".$field[4]." like '%$qcari%')"; 
 } 
  
 $pageQry = mysqli_query($koneksidb, $pageSql) or die ("error paging: ".$pageSql); 
@@ -135,7 +144,8 @@ $max	 = ceil($jml/$row);
 		<th width="10" colspan="2"><strong>Option</strong></td> 
 	</tr> 
 <?php 
-tampilTabel($koneksidb,$pageSql,$field,$formName,$hal,$row); 
+$field[7]="fakultas";
+tampilTabel($koneksidb,$pageSql2,$field,$formName,$hal,$row); 
 ?> 
 </table> 
 <?php tabelFooter($jml,$row,$max,$formName,$hal) ?> 
