@@ -433,18 +433,13 @@ function buatEdit($folderOutput, $namaForm, $namaTable,$jmlField){
 	fwrite($myfile, "				<input name=\"txt0\" type=\"text\" class=\"input-xlarge\" id=\"input00\" value=\"<?php echo \$Kode; ?>\"  size=\"60\" maxlength=\"50\" readonly />  \n");
 	fwrite($myfile, "			</div> \n");
 	fwrite($myfile, "		</div> \n");
-
+	fwrite($myfile, "		<?php \n");	
 for($i=1;$i<=$jmlField;$i++){
 	if(($i!=1) && ($i!=2)){
-	fwrite($myfile, "		<div class=\"control-group\"> \n");
-	fwrite($myfile, "			<label class=\"control-label\" for=\"input0".$i."\"><?php echo \$isian[".$i."]; ?></label>  \n");
-	fwrite($myfile, "			<div class=\"controls\">  \n");
-	fwrite($myfile, "				<input name=\"txt".$i."\" type=\"text\" class=\"input-xlarge\" id=\"input0".$i."\" value=\"<?php echo \$data[".$i."]; ?>\"  size=\"60\" maxlength=\"50\" />  \n");
-	fwrite($myfile, "			</div> \n");
-	fwrite($myfile, "		</div> \n");
+	fwrite($myfile, "		buatEditText(\$isian[$i],$i,\$data[$i] \n");
 	}
 }
-
+	fwrite($myfile, "		?> \n");	
 	fwrite($myfile, "<div class=\"form-actions\"> \n");
 	fwrite($myfile, "							<button type=\"submit\"  name=\"btnSave\" class=\"btn btn-primary\">Simpan</button> \n");
 	fwrite($myfile, "							<button type=\"reset\" class=\"btn \" name=\"reset\" id=\"reset\" onclick=\"return confirm('hapus data yang telah anda ketik?')\"/>Reset</button> \n");
