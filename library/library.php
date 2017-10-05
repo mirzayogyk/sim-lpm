@@ -667,4 +667,22 @@ function buatInputSelect($isian,$i,$data,$namaTable,$koneksidb,$orderby){
 									</td>  \n");
 	echo("						</tr> \n");
 }
+
+function buatEditText($text,$i,$data){
+	echo "	<div class=\"control-group\"> \n";
+	echo "	<label class=\"control-label\" for=\"input0".$i."\">".$text."</label> \n";  
+	echo "	<div class=\"controls\"> \n";  
+	echo "		<input name=\"txt$i\" type=\"text\" class=\"input-xlarge\" id=\"input00\" value=\"$data\"  size=\"60\" maxlength=\"50\"  /> \n";  
+	echo "	</div> \n"; 
+	echo "	</div>  \n";
+}
+
+function buatEditTanggal($text,$i,$data){
+	echo "	<div class=\"control-group\"> \n";
+	echo "	<label class=\"control-label\" for=\"input0".$i."\">".$text."</label> \n";  
+	echo "	<div class=\"controls\"> \n";  
+	echo "		<input name=\"txt$i\" type=\"date\" class=\"input-xlarge\" id=\"input00\" value=\"$data\"  size=\"60\" maxlength=\"50\"  /> \n";  
+	echo "	</div> \n"; 
+	echo "	</div>  \n";
+}
 ?>

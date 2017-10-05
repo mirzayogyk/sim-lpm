@@ -66,36 +66,13 @@ for($i=0;$i<=$jmlField;$i++){
 				<input name="txt0" type="text" class="input-xlarge" id="input00" value="<?php echo $Kode; ?>"  size="60" maxlength="50" readonly />  
 			</div> 
 		</div> 
-		<div class="control-group"> 
-			<label class="control-label" for="input03"><?php echo $isian[3]; ?></label>  
-			<div class="controls">  
-				<input name="txt3" type="text" class="input-xlarge" id="input03" value="<?php echo $data[3]; ?>"  size="60" maxlength="50" />  
-			</div> 
-		</div> 
-		<div class="control-group"> 
-			<label class="control-label" for="input04"><?php echo $isian[4]; ?></label>  
-			<div class="controls">  
-				<input name="txt4" type="text" class="input-xlarge" id="input04" value="<?php echo $data[4]; ?>"  size="60" maxlength="50" />  
-			</div> 
-		</div> 
-		<div class="control-group"> 
-			<label class="control-label" for="input05"><?php echo $isian[5]; ?></label>  
-			<div class="controls">  
-				<input name="txt5" type="text" class="input-xlarge" id="input05" value="<?php echo $data[5]; ?>"  size="60" maxlength="50" />  
-			</div> 
-		</div> 
-		<div class="control-group"> 
-			<label class="control-label" for="input06"><?php echo $isian[6]; ?></label>  
-			<div class="controls">  
-				<input name="txt6" type="text" class="input-xlarge" id="input06" value="<?php echo $data[6]; ?>"  size="60" maxlength="50" />  
-			</div> 
-		</div> 
-		<div class="control-group"> 
-			<label class="control-label" for="input07"><?php echo $isian[7]; ?></label>  
-			<div class="controls">  
-				<input name="txt7" type="text" class="input-xlarge" id="input07" value="<?php echo $data[7]; ?>"  size="60" maxlength="50" />  
-			</div> 
-		</div> 
+		<?php
+			buatEditText($isian[3],3,$data[3]);
+			buatEditText($isian[4],4,$data[4]);
+			buatEditText($isian[5],5,$data[5]);
+			buatEditText($isian[6],6,$data[6]);
+			buatEditText($isian[7],7,$data[7]);
+		?>
 <div class="form-actions"> 
 							<button type="submit"  name="btnSave" class="btn btn-primary">Simpan</button> 
 							<button type="reset" class="btn " name="reset" id="reset" onclick="return confirm('hapus data yang telah anda ketik?')"/>Reset</button> 
