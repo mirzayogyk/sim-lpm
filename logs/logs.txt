@@ -74,6 +74,7 @@
 [2017-10-05 06:54:07am][sudo][::1][DELETE SUCCESS][DELETE FROM tprodi WHERE id='40']
 [2017-10-05 06:54:11am][sudo][::1][DELETE SUCCESS][DELETE FROM tprodi WHERE id='41']
 [2017-10-05 07:11:16am][sudo][::1][INSERT FAIL][(Data <b>Tanggal Mulai</b> tidak boleh kosong !, Data <b>Tanggal Selesai</b> tidak boleh kosong ! )]
+[2017-10-05 07:48:08am][sudo][::1][INSERT SUCCESS][INSERT INTO ttahun (created_at, updated_at, kode_tahun, tahun, tanggal_mulai, tanggal_selesai ) VALUES ('2017-10-05 07:48:08am', '', '0120162017', 'GANJIL 2016/2017', '2017-10-04', '2017-10-28')]
 #MARKER
 
 

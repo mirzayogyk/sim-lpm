@@ -80,13 +80,13 @@ for($i=0;$i<=$jmlField;$i++){
 		<div class="control-group"> 
 			<label class="control-label" for="input05"><?php echo $isian[5]; ?></label>  
 			<div class="controls">  
-				<input name="txt5" type="text" class="input-xlarge" id="input05" value="<?php echo $data[5]; ?>"  size="60" maxlength="50" />  
+				<input name="txt5" type="date" class="input-xlarge" id="input05" value="<?php echo $data[5]; ?>"  size="60" maxlength="50" />  
 			</div> 
 		</div> 
 		<div class="control-group"> 
 			<label class="control-label" for="input06"><?php echo $isian[6]; ?></label>  
 			<div class="controls">  
-				<input name="txt6" type="text" class="input-xlarge" id="input06" value="<?php echo $data[6]; ?>"  size="60" maxlength="50" />  
+				<input name="txt6" type="date" class="input-xlarge" id="input06" value="<?php echo $data[6]; ?>"  size="60" maxlength="50" />  
 			</div> 
 		</div> 
 <div class="form-actions"> 
