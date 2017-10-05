@@ -65,13 +65,12 @@ for($i=0;$i<=$jmlField;$i++){
 				<input name="txt0" type="text" class="input-xlarge" id="input00" value="<?php echo $Kode; ?>"  size="60" maxlength="50" readonly />  
 			</div> 
 		</div> 
-		<?php	
-			buatEditText($isian[3],3,$data[3]);
-			buatEditText($isian[4],4,$data[4]);
-			buatEditTanggal($isian[5],5,$data[5]);
-			buatEditTanggal($isian[6],6,$data[6]);
-		?>
-
+		<?php 
+		buatEditText($isian[3],3,$data[3]); 
+		buatEditText($isian[4],4,$data[4]); 
+		buatEditTanggal($isian[5],5,$data[5]); 
+		buatEditTanggal($isian[6],6,$data[6]); 
+		?> 
 <div class="form-actions"> 
 							<button type="submit"  name="btnSave" class="btn btn-primary">Simpan</button> 
 							<button type="reset" class="btn " name="reset" id="reset" onclick="return confirm('hapus data yang telah anda ketik?')"/>Reset</button> 

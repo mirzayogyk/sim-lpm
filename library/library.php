@@ -436,7 +436,7 @@ function buatEdit($folderOutput, $namaForm, $namaTable,$jmlField){
 	fwrite($myfile, "		<?php \n");	
 for($i=1;$i<=$jmlField;$i++){
 	if(($i!=1) && ($i!=2)){
-	fwrite($myfile, "		buatEditText(\$isian[$i],$i,\$data[$i] \n");
+	fwrite($myfile, "		buatEditText(\$isian[$i],$i,\$data[$i]); \n");
 	}
 }
 	fwrite($myfile, "		?> \n");	
