@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<title>SIMBa - Sistem Informas Manajemen Barang</title><meta charset="UTF-8" />
+<title>Berita Acara Perkuliahan</title><meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="css/maruti-media.css" class="skin-color" />	
 <?php
 date_default_timezone_set("Asia/Kuala_Lumpur");
-if(isset($_SESSION['MAIN_FROZEN_THRON3']))
+if(isset($_SESSION['dosen']))
 {
 	 ?>
 	 	
@@ -22,7 +22,7 @@ if(isset($_SESSION['MAIN_FROZEN_THRON3']))
 <link rel="stylesheet" href="css/maruti-media-dongker.css" class="skin-color" />
 <?php
 }
-elseif(isset($_SESSION['MAIN_DAS_L4H']))
+elseif(isset($_SESSION['ketuakelas']))
 {
 ?>		
 <link rel="stylesheet" href="css/maruti-style-hijau.css" />
@@ -59,23 +59,17 @@ else {
 
 <!--top-Header-menu-->
 <?php
-if(isset($_SESSION['MAIN_FROZEN_THRON3']))
+if(isset($_SESSION['dosen']))
 {
 	include("layouts/partials/nav.php");
 	include("layouts/partials/navlist.php");
 }
-elseif(isset($_SESSION['MAIN_DAS_L4H']))
-{
-	include("cont/nav.php");
-	include("cont/navlist_kec.php");
-}
-elseif(isset($_SESSION['MAIN_DOTA_KAH']))
-{
-	include("cont/nav_log.php");
-	include("cont/navlist_log.php");
+else if(isset($_SESSION['ketuakelas'])){
+	include("layouts/partials/nav.php");
+	include("layouts/partials/navlist-kk.php");
 }
 else {
-	include("layouts/partials/nav.php");
-	include("layouts/partials/navlist.php");
+	include("layouts/partials/nav-user.php");
+	include("layouts/partials/navlist-user.php");
 }	?>
 <!--close-top-Header-menu-->

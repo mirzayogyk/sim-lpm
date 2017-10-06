@@ -17,7 +17,11 @@ if($_GET) {
 
 		case 'Terima-Kasih' :				
 			if(!file_exists ("page/terima_kasih.php")) die ("Sorry Empty Page!"); 
-			include "page/terima_kasih.php";	break;	
+			include "page/terima_kasih.php";	break;
+		
+		case 'Login' :				
+			if(!file_exists ("superadmin/index.php")) die ("Sorry Empty Page!"); 
+			include "superadmin/index.php";	break;
 			
 		case 'Generator' :				
 			if(!file_exists ("pages/generator.php")) die ("Sorry Empty Page!"); 
@@ -86,7 +90,22 @@ if($_GET) {
 			if(!file_exists ('pages/masters/tahun_delete.php')) include "pages/404.php"; 
 			include 'pages/masters/tahun_delete.php'; break;
   						
+ 
+			case 'Presensi-Data' :			
+			if(!file_exists ('pages/masters/presensi_data.php')) include "pages/404.php"; 
+			include 'pages/masters/presensi_data.php'; break;
+  
+			case 'Presensi-Edit' :		
+			if(!file_exists ('pages/masters/presensi_edit.php')) include "pages/404.php"; 
+			include 'pages/masters/presensi_edit.php'; break;
+  
+			case 'Presensi-Delete' :			
+			if(!file_exists ('pages/masters/presensi_delete.php')) include "pages/404.php"; 
+			include 'pages/masters/presensi_delete.php'; break;
+  						
 			#MARKER 
+
+			
 
 			
 

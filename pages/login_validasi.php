@@ -32,7 +32,7 @@ if($_GET) {
 		$txtPassword=$_POST['txtPassword'];
 		$txtPassword= str_replace("'","&acute;",$txtPassword);
 		
-		#$cmbLevel	=$_POST['cmbLevel'];
+		$txtProdi	=$_POST['txtProdi'];
 		
 		unset($_SESSION['captchakuis']);
 		# JIKA ADA PESAN ERROR DARI VALIDASI	
@@ -52,7 +52,7 @@ if($_GET) {
 		}
 		else {
 			# LOGIN CEK KE TABEL USER LOGIN
-			$loginSql = "SELECT * FROM tpengguna WHERE username='".$txtUser.
+			$loginSql = "SELECT * FROM user WHERE username='".$txtUser.
 						#"' AND password='".md5($txtPassword)."' AND level='$cmbLevel'";
 						"' AND password='".md5($txtPassword)."'";
 			$loginQry = mysqli_query($koneksidb, $loginSql)  
@@ -62,15 +62,13 @@ if($_GET) {
 				if (mysqli_num_rows($loginQry) >=1) {
 					$loginData = mysqli_fetch_array($loginQry);
 					$_SESSION['USERMRZ'] = $loginData['username']; 
-					$_SESSION['APUCHE_HAHA'] = $loginData['password']; 
-					$_SESSION['ID_CRAB'] = $loginData['id_admin']; 
-					$_SESSION['NGARAN_SHARPSHOOT3R'] = $loginData['username']; 
-					// $_SESSION['MAIN_FROZEN_THRON3'] = $loginData['nama']; 
-					if($loginData['level']=="1") {
-					$_SESSION['MAIN_FROZEN_THRON3'] = $loginData['nama'];
-					} 
-					if($loginData['level']=="2") {
-					$_SESSION['MAIN_DAS_L4H'] = $loginData['nama'];
+					$_SESSION['NAMEMRZ'] = $loginData['password']; 
+					$_SESSION['PRODIMRZA'] = $txtProdi;
+					if($loginData['level']=="DOSEN") {
+						$_SESSION['dosen'] = $loginData['level'];
+					}
+					if($loginData['level']=="KETUA KELAS") {
+						$_SESSION['ketuakelas'] = $loginData['level'];
 					}
 					buatLog($loginData['username'],"LOGGED IN","NULL");
 					echo "<meta http-equiv='refresh' content='0; url=?page=Halaman-Utama'>";

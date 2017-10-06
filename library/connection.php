@@ -3,7 +3,7 @@
 $myHost	= "localhost";
 $myUser	= "root";
 $myPass	= "";
-$myDbs	= "db_sim_lpm";
+$myDbs	= "uniska_sia";
 
 // Konek ke MySQL Server 
 $koneksidb	= mysqli_connect($myHost, $myUser, $myPass, $myDbs);

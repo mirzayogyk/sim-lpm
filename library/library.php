@@ -1,5 +1,5 @@
 <?php
-include ("library/connection.php");
+include ("connection.php");
 # Pengaturan tanggal komputer
 date_default_timezone_set("Asia/Jakarta");
 
@@ -636,6 +636,10 @@ function buatInputText($text,$i,$data){
 	echo("						</tr> \n");
 }
 
+function buatInputHidden($text,$i,$data){
+	echo("							<input name=\"txt".$i."\" type=\"hidden\" class=\"input-xxlarge\" value=\"".$data."\" size=\"60\" maxlength=\"60\"  />  \n");
+}
+
 function buatInputTanggal($text,$i,$data){
 	echo("						<tr> \n");
 	echo("							<td width=\"24%\"><b>".$text."</b></td>  \n");
@@ -657,6 +661,80 @@ function buatInputSelect($isian,$i,$data,$namaTable,$koneksidb,$orderby){
 			$cek = "selected";
 		} else { $cek=""; }											
 		echo "<option value='$kolomData1[id]' $cek>$kolomData1[4] </option>";
+	}
+	echo("								</select>
+									</td>  \n");
+	echo("						</tr> \n");
+}
+
+function buatInputSelectHadir($isian,$i){
+	echo("						<tr> \n");
+	echo("							<td width=\"24%\"><b>".$isian."</b></td>  \n");
+	echo("							<td width=\"2%\"><b>:</b></td>  \n");
+	echo("							<td width=\"74%\">
+										<select name=\"txt".$i."\" class=\"span4\">");											
+	echo "									<option value='HADIR' selected>HADIR</option>";
+	echo "									<option value='IJIN' >IJIN</option>";
+	echo "									<option value='SAKIT' >SAKIT</option>";
+	echo "									<option value='ALPA' >ALPA</option>";
+	echo("								</select>
+									</td>  \n");
+	echo("						</tr> \n");
+}
+
+function buatInputSelectJam($isian,$i,$data,$namaTable,$koneksidb,$field,$kondisi,$orderby){
+	echo("						<tr> \n");
+	echo("							<td width=\"24%\"><b>".$isian."</b></td>  \n");
+	echo("							<td width=\"2%\"><b>:</b></td>  \n");
+	echo("							<td width=\"74%\">
+										<select name=\"txt".$i."\" class=\"span4\">");	
+	$mySql = "SELECT * FROM ".$namaTable." WHERE $field = '$kondisi' ORDER BY ".$orderby." ASC";										
+	$myQry = mysqli_query($koneksidb, $mySql) or die ("Gagal Query ruangan  ".$mySql);										
+	while ($kolomData1 = mysqli_fetch_array($myQry)) {
+		if ($data == $kolomData1['idj']) {
+			$cek = "selected";
+		} else { $cek=""; }											
+		echo "<option value='$kolomData1[idj]' $cek>$kolomData1[mulai] - $kolomData1[sampai] </option>";
+	}
+	echo("								</select>
+									</td>  \n");
+	echo("						</tr> \n");
+}
+
+function buatInputSelectMatakuliah($isian,$i,$data,$namaTable,$koneksidb,$kode_prodi,$tahun_id,$NIDN,$orderby){
+	echo("						<tr> \n");
+	echo("							<td width=\"24%\"><b>".$isian."</b></td>  \n");
+	echo("							<td width=\"2%\"><b>:</b></td>  \n");
+	echo("							<td width=\"74%\">
+										<select name=\"txt".$i."\" class=\"span6\">");	
+	$mySql = "SELECT $namaTable.*, m_mata_kuliah.nama_mk, m_mata_kuliah.kode_mk, m_kelas.idk, m_kelas.kelas FROM ".$namaTable." 
+					INNER JOIN m_mata_kuliah ON m_mata_kuliah.kode_mk = t_jadwal.kode_mk 
+					INNER JOIN m_kelas ON t_jadwal.kelas = m_kelas.idk GROUP BY idj  HAVING $namaTable.kode_prodi='$kode_prodi' AND $namaTable.tahun_id = '$tahun_id' AND $namaTable.NIDN = '$NIDN' AND $namaTable.kode_mk = m_mata_kuliah.kode_mk ORDER BY ".$orderby." ASC";										
+	$myQry = mysqli_query($koneksidb, $mySql) or die ("Gagal Query ruangan  ".$mySql);										
+	while ($kolomData1 = mysqli_fetch_array($myQry)) {
+		if ($data == $kolomData1['idj']) {
+			$cek = "selected";
+		} else { $cek=""; }											
+		echo "<option value='$kolomData1[idj]' $cek>$kolomData1[kode_mk] - $kolomData1[nama_mk] - $kolomData1[kelas] </option>";
+	}
+	echo("								</select>
+									</td>  \n");
+	echo("						</tr> \n");
+}
+
+function buatInputSelectKelas($isian,$i,$data,$namaTable,$koneksidb,$field,$kondisi,$orderby){
+	echo("						<tr> \n");
+	echo("							<td width=\"24%\"><b>".$isian."</b></td>  \n");
+	echo("							<td width=\"2%\"><b>:</b></td>  \n");
+	echo("							<td width=\"74%\">
+										<select name=\"txt".$i."\" class=\"span4\">");	
+	$mySql = "SELECT * FROM ".$namaTable." WHERE $field = '$kondisi' AND kelas != 'SEMINAR' AND kelas !='SKRIPSI' AND kelas !='KERJA PRAKTEK' ORDER BY ".$orderby." ASC";										
+	$myQry = mysqli_query($koneksidb, $mySql) or die ("Gagal Query ruangan  ".$mySql);										
+	while ($kolomData1 = mysqli_fetch_array($myQry)) {
+		if ($data == $kolomData1['idk']) {
+			$cek = "selected";
+		} else { $cek=""; }											
+		echo "<option value='$kolomData1[idk]' $cek>$kolomData1[kelas] </option>";
 	}
 	echo("								</select>
 									</td>  \n");
