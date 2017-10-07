@@ -1,7 +1,7 @@
 <?php 
 $tableName = "t_dosen_presensi"; 
 $formName = "Presensi"; 
-$jmlField = "17"; 
+$jmlField = "20"; 
 
 $field[0]="iddm"; 
 $isian[0]="Iddm"; 

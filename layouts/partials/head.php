@@ -61,15 +61,19 @@ else {
 <?php
 if(isset($_SESSION['dosen']))
 {
-	include("layouts/partials/nav.php");
+	//include("layouts/partials/nav.php");
 	include("layouts/partials/navlist.php");
 }
 else if(isset($_SESSION['ketuakelas'])){
-	include("layouts/partials/nav.php");
+	//include("layouts/partials/nav.php");
 	include("layouts/partials/navlist-kk.php");
 }
+else if(isset($_SESSION['operator'])){
+	//include("layouts/partials/nav.php");
+	include("layouts/partials/navlist-operator.php");
+}
 else {
-	include("layouts/partials/nav-user.php");
+	//include("layouts/partials/nav-user.php");
 	include("layouts/partials/navlist-user.php");
 }	?>
 <!--close-top-Header-menu-->

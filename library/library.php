@@ -195,7 +195,6 @@ function tampilTabel($koneksidb,$pageSql,$field,$formName,$hal,$row){
 }
 
 
-
 function tabelFooter($jml,$row,$max,$formName,$hal){
 	$max=ceil($jml/$row);
 	echo("<table class=\"table table-bordered table-striped\">");
@@ -636,6 +635,13 @@ function buatInputText($text,$i,$data){
 	echo("						</tr> \n");
 }
 
+function buatInputTextBS($text,$i,$data){
+	echo("						<div class=\"form-group\"> \n");
+	echo("							<label for=\"txt".$i."\">$text</label>  \n");
+	echo("							<input name=\"txt".$i."\" id=\"txt".$i."\" type=\"text\" class=\"form-control\" value=\"".$data."\"   />  \n");
+	echo("						</div> \n");
+} 
+
 function buatInputHidden($text,$i,$data){
 	echo("							<input name=\"txt".$i."\" type=\"hidden\" class=\"input-xxlarge\" value=\"".$data."\" size=\"60\" maxlength=\"60\"  />  \n");
 }
@@ -666,28 +672,60 @@ function buatInputSelect($isian,$i,$data,$namaTable,$koneksidb,$orderby){
 									</td>  \n");
 	echo("						</tr> \n");
 }
+function buatInputSelectBS($isian,$i,$data,$namaTable,$koneksidb,$orderby){
+	echo("						<div class=\"form-group\"> \n");
+	echo("							<label for=\"txt".$i."\">$isian</label>  \n");
+	echo("							<select name=\"txt".$i."\" id=\"txt".$i."\" class=\"span4\">");	
+									$mySql = "SELECT * FROM ".$namaTable." ORDER BY ".$orderby." ASC";										
+									$myQry = mysqli_query($koneksidb, $mySql) or die ("Gagal Query ruangan  ".$mySql);										
+									while ($kolomData1 = mysqli_fetch_array($myQry)) {
+										if ($data == $kolomData1['id']) {
+											$cek = "selected";
+										} else { $cek=""; }											
+										echo "<option value='$kolomData1[id]' $cek>$kolomData1[4] </option>";
+	}
+	echo("								</select>
+									</div>  \n");
+}
+
+
+
+function buatEditText($text,$i,$data){
+	echo "	<div class=\"control-group\"> \n";
+	echo "	<label class=\"control-label\" for=\"input0".$i."\">".$text."</label> \n";  
+	echo "	<div class=\"controls\"> \n";  
+	echo "		<input name=\"txt$i\" type=\"text\" class=\"input-xlarge\" id=\"input00\" value=\"$data\"  size=\"60\" maxlength=\"50\"  /> \n";  
+	echo "	</div> \n"; 
+	echo "	</div>  \n";
+}
+
+function buatEditTanggal($text,$i,$data){
+	echo "	<div class=\"control-group\"> \n";
+	echo "	<label class=\"control-label\" for=\"input0".$i."\">".$text."</label> \n";  
+	echo "	<div class=\"controls\"> \n";  
+	echo "		<input name=\"txt$i\" type=\"date\" class=\"input-xlarge\" id=\"input00\" value=\"$data\"  size=\"60\" maxlength=\"50\"  /> \n";  
+	echo "	</div> \n"; 
+	echo "	</div>  \n";
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function buatInputSelectHadir($isian,$i){
-	echo("						<tr> \n");
-	echo("							<td width=\"24%\"><b>".$isian."</b></td>  \n");
-	echo("							<td width=\"2%\"><b>:</b></td>  \n");
-	echo("							<td width=\"74%\">
-										<select name=\"txt".$i."\" class=\"span4\">");											
+	echo("						<div class=\"form-group\"> \n");
+	echo("							<label for=\"txt".$i."\">$isian</label>  \n
+										<select name=\"txt".$i."\" >");											
 	echo "									<option value='HADIR' selected>HADIR</option>";
 	echo "									<option value='IJIN' >IJIN</option>";
 	echo "									<option value='SAKIT' >SAKIT</option>";
 	echo "									<option value='ALPA' >ALPA</option>";
-	echo("								</select>
-									</td>  \n");
-	echo("						</tr> \n");
+	echo("								</select>\n
+								</div>  \n");
 }
 
 function buatInputSelectJam($isian,$i,$data,$namaTable,$koneksidb,$field,$kondisi,$orderby){
-	echo("						<tr> \n");
-	echo("							<td width=\"24%\"><b>".$isian."</b></td>  \n");
-	echo("							<td width=\"2%\"><b>:</b></td>  \n");
-	echo("							<td width=\"74%\">
-										<select name=\"txt".$i."\" class=\"span4\">");	
+	echo("						<div class=\"form-group\"> \n");
+	echo("							<label for=\"txt".$i."\">$isian</label>  \n
+										<select name=\"txt".$i."\" >");	
 	$mySql = "SELECT * FROM ".$namaTable." WHERE $field = '$kondisi' ORDER BY ".$orderby." ASC";										
 	$myQry = mysqli_query($koneksidb, $mySql) or die ("Gagal Query ruangan  ".$mySql);										
 	while ($kolomData1 = mysqli_fetch_array($myQry)) {
@@ -697,8 +735,7 @@ function buatInputSelectJam($isian,$i,$data,$namaTable,$koneksidb,$field,$kondis
 		echo "<option value='$kolomData1[idj]' $cek>$kolomData1[mulai] - $kolomData1[sampai] </option>";
 	}
 	echo("								</select>
-									</td>  \n");
-	echo("						</tr> \n");
+									</div>  \n");
 }
 
 function buatInputSelectMatakuliah($isian,$i,$data,$namaTable,$koneksidb,$kode_prodi,$tahun_id,$NIDN,$orderby){
@@ -741,21 +778,42 @@ function buatInputSelectKelas($isian,$i,$data,$namaTable,$koneksidb,$field,$kond
 	echo("						</tr> \n");
 }
 
-function buatEditText($text,$i,$data){
-	echo "	<div class=\"control-group\"> \n";
-	echo "	<label class=\"control-label\" for=\"input0".$i."\">".$text."</label> \n";  
-	echo "	<div class=\"controls\"> \n";  
-	echo "		<input name=\"txt$i\" type=\"text\" class=\"input-xlarge\" id=\"input00\" value=\"$data\"  size=\"60\" maxlength=\"50\"  /> \n";  
-	echo "	</div> \n"; 
-	echo "	</div>  \n";
+function tampilTabel1($koneksidb,$pageSql,$field,$formName,$hal,$row){
+	$mySql = $pageSql." ORDER BY ".$field[4]." ASC LIMIT $hal, $row";
+	$myQry = mysqli_query($koneksidb, $mySql)  or die ("Query salah : ".$mySql);
+	$nomor  = 1+$hal; 
+	$i=0;
+	while ($kolomData = mysqli_fetch_array($myQry)) {
+		$Kode = $kolomData['idj'];
+		echo("<tr>");
+		echo("<td align=\"center\">".$nomor++."</td>");
+			echo("<td> ".$kolomData[$field[4]]." -  <b>".$kolomData['kelas']."</b> </td>");
+			$i++;
+		
+		echo("</td>");	
+		echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Data&Kode=".$Kode." \" target=\"_self\"><i class=\"icon-edit\"></i></a></td>");
+		echo("</tr>");	
+	}
+}
+function tampilTabelPresensi($koneksidb,$pageSql,$field,$formName,$hal,$row){
+	$mySql = $pageSql." ORDER BY tanggal ASC LIMIT $hal, $row";
+	$myQry = mysqli_query($koneksidb, $mySql)  or die ("Query salah : ".$mySql);
+	$nomor  = 1+$hal; 
+	$i=0;
+	while ($kolomData = mysqli_fetch_array($myQry)) {
+		$Kode = $kolomData['iddm'];
+		echo("<tr>");
+		echo("<td align=\"center\">".$nomor++."</td>");
+			echo("<td> ".$kolomData['tanggal']."</b> </td>");
+			echo("<td> ".$kolomData['bahasan']."</b> </td>");
+			$i++;
+		
+		echo("</td>");	
+		echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Data&Kode=".$Kode." \" target=\"_self\"><i class=\"icon-eye\"></i></a></td>");
+		echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Data&Kode=".$Kode." \" target=\"_self\"><i class=\"icon-trash\"></i></a></td>");
+		echo("</tr>");	
+	}
 }
 
-function buatEditTanggal($text,$i,$data){
-	echo "	<div class=\"control-group\"> \n";
-	echo "	<label class=\"control-label\" for=\"input0".$i."\">".$text."</label> \n";  
-	echo "	<div class=\"controls\"> \n";  
-	echo "		<input name=\"txt$i\" type=\"date\" class=\"input-xlarge\" id=\"input00\" value=\"$data\"  size=\"60\" maxlength=\"50\"  /> \n";  
-	echo "	</div> \n"; 
-	echo "	</div>  \n";
-}
+
 ?>

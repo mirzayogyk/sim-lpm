@@ -63,12 +63,15 @@ if($_GET) {
 					$loginData = mysqli_fetch_array($loginQry);
 					$_SESSION['USERMRZ'] = $loginData['username']; 
 					$_SESSION['NAMEMRZ'] = $loginData['password']; 
-					$_SESSION['PRODIMRZA'] = $txtProdi;
+					$_SESSION['PRODIMRZ'] = $txtProdi;
 					if($loginData['level']=="DOSEN") {
 						$_SESSION['dosen'] = $loginData['level'];
 					}
 					if($loginData['level']=="KETUA KELAS") {
 						$_SESSION['ketuakelas'] = $loginData['level'];
+					}
+					if($loginData['level']=="OPERATOR") {
+						$_SESSION['operator'] = $loginData['level'];
 					}
 					buatLog($loginData['username'],"LOGGED IN","NULL");
 					echo "<meta http-equiv='refresh' content='0; url=?page=Halaman-Utama'>";

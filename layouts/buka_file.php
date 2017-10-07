@@ -6,6 +6,10 @@ if($_GET) {
 		case '' :				
 			if(!file_exists ("pages/home.php")) include "pages/404.php"; 
 			include "pages/home.php";	break;
+			
+		case 'Halaman-Utama' :				
+			if(!file_exists ("pages/home.php")) include "pages/404.php"; 
+			include "pages/home.php";	break;
 		
 		case 'Error' :				
 			if(!file_exists ("page/404.php")) die ("Halaman Rusak!"); 

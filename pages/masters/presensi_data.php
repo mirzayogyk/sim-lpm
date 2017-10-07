@@ -2,6 +2,7 @@
 include_once "library/seslogin.php"; 
 include_once "presensi_config.php"; 
 if($_GET) { 
+	$Kode	 =  $_GET['Kode'];
 	if(isset($_POST['btnSave'])){ 
  
 		$txt[1] = $_POST['txt1'];  
@@ -21,10 +22,10 @@ if($_GET) {
 		$txt[15] = $_POST['txt15']; 
 		$txt[16] = $_POST['txt16']; 
 		$txt[17] = $_POST['txt17']; 
-		$txt[18] = 'N';
-		$txt[19] = NULL;
-		$txt[20] = '';
- 
+		$txt[18] = $_POST['txt18']; 
+		$txt[19] = $_POST['txt19']; 
+		$txt[20] = $_POST['txt20']; 
+		
 		$pesanError = array(); 
 		for($i=3;$i<=$jmlField;$i++){ 
 			if (trim($txt[$i])=="") { 
@@ -32,10 +33,12 @@ if($_GET) {
 			} 
 		} 
  
+		/*
 		$ada = cekAda($koneksidb,$tableName,$field[3],$isian[3],$txt[3]); 
 		if($ada)        {  
 			$pesanError[] = "Maaf, ".$isian[3]." <b> ".$txt[3]." </b> Sudah Ada.";	 
 		} 
+		*/
  
 		if (count($pesanError)>=1 ){  
 			echo "<div class='mssgBox'>";  
@@ -53,14 +56,14 @@ if($_GET) {
 			$myQry	= mysqli_query($koneksidb, $mySql) or die ("Gagal query insert :".getInsert($jmlField,$field,$txt)); 
 			if($myQry){ 
 			buatLog($_SESSION['USERMRZ'],"INSERT SUCCESS",$mySql); 
-				echo "<meta http-equiv='refresh' content='0; url=?page=".$formName."-Data'>"; 
+				echo "<meta http-equiv='refresh' content='0; url=?page=".$formName."-Data&Kode=$Kode'>"; 
 			} 
 			exit; 
 		} 
  
 	} 
  
-	$kode_prodi = $_SESSION['PRODIMRZA'];
+	$kode_prodi = $_SESSION['PRODIMRZ'];
 	$cariSql = "SELECT m_program_studi.* FROM m_program_studi WHERE kode_prodi=$kode_prodi"; 
 	$cariQry = mysqli_query($koneksidb, $cariSql) or die ("error cari: ".$cariSql); 
 	while ($hasilCari = mysqli_fetch_array($cariQry)) {
@@ -74,7 +77,28 @@ if($_GET) {
 	$cariQry = mysqli_query($koneksidb, $cariSql) or die ("error cari: ".$cariSql); 
 	while ($hasilCari = mysqli_fetch_array($cariQry)) {
 		$tahun_id = $hasilCari['tahun_id'];
+	}
+
+	$Kode	 =  $_GET['Kode'];
+
+	$cariSql = "SELECT t_jadwal.* FROM t_jadwal WHERE idj=$Kode"; 
+	$cariQry = mysqli_query($koneksidb, $cariSql) or die ("error cari: ".$cariSql); 
+	while ($hasilCari = mysqli_fetch_array($cariQry)) {
 		$semester = $hasilCari['semester'];
+		$kelas = $hasilCari['kelas'];
+		$kode_mk = $hasilCari['kode_mk'];
+	}
+
+	$cariSql = "SELECT * FROM m_kelas WHERE idk=$kelas"; 
+	$cariQry = mysqli_query($koneksidb, $cariSql) or die ("error cari: ".$cariSql); 
+	while ($hasilCari = mysqli_fetch_array($cariQry)) {
+		$kelas_nama = $hasilCari['kelas'];
+	}
+
+	$cariSql = "SELECT * FROM m_mata_kuliah WHERE kode_mk='$kode_mk'"; 
+	$cariQry = mysqli_query($koneksidb, $cariSql) or die ("error cari: ".$cariSql); 
+	while ($hasilCari = mysqli_fetch_array($cariQry)) {
+		$nama_mk = $hasilCari['nama_mk'];
 	}
 
 	$hari = date('l');
@@ -94,7 +118,7 @@ if($_GET) {
 		$hari='Minggu';
 	
 
-
+	$Kode	 = isset($_GET['Kode']) ?  $_GET['Kode'] : $_POST['txt0']; 
 	$data[1]	= isset($_POST['txt1']) ? $_POST['txt1'] : ''; 
 	$data[2]	= isset($_POST['txt2']) ? $_POST['txt2'] : ''; 
 	$data[3]	= isset($_POST['txt3']) ? $_POST['txt3'] : ''; 
@@ -118,7 +142,7 @@ if($_GET) {
 } 
 $row = 20; 
 $hal = isset($_GET['hal']) ? $_GET['hal'] : 0; 
-$pageSql = "SELECT $tableName.* FROM ".$tableName; 
+$pageSql = "SELECT $tableName.* FROM ".$tableName." WHERE tahun_id='$tahun_id' AND semester='$semester' AND kelas = '$kelas' AND NIDN='".$_SESSION['USERMRZ']."'"; 
  
 if(isset($_POST['qcari'])){ 
   $qcari=$_POST['qcari']; 
@@ -133,11 +157,18 @@ $max	 = ceil($jml/$row);
  
 <table class="table table-striped"> 
 	<tr> 
-	  <td colspan="2"><h1><b> <?php echo $formName;?> </b>  
-	  <form class="navbar-search pull-right"  method="POST" action="?page=<?php echo $formName?>-Data">  
-		  <input type="text" name="qcari" placeholder="Cari..." autofocus/> 
-	  </form></h1> </td> 
+	  <td colspan="2">
+	  	<h5><b> <?php echo $kode_mk." - ".$nama_mk." - ".$kelas_nama;?> </b> </h5> 
+	  </td> 
 	</tr> 
+		<td>
+			<form class="navbar-search pull-right"  method="POST" action="?page=<?php echo $formName?>-Data">  
+				<input type="text" name="qcari" placeholder="Cari..." autofocus/> 
+			</form>
+		</td>
+	<tr> 
+
+	</tr>
 </table> 
 <div class="accordion" id="collapse-group">         
   <div class="accordion-group widget-box"> 
@@ -150,10 +181,11 @@ $max	 = ceil($jml/$row);
 	  </div> 
 	  <div class="collapse accordion-body" id="collapseGTwo"> 
 		  <div class="widget-content">      
-			  <form id="new-project" class="form-horizontal " action="?page=<?php echo $formName;?>-Data" method="post" name="form1" target="_self"> 
+			  <form id="new-project" class="form-horizontal " action="?page=<?php echo $formName;?>-Data&Kode=<?php echo $Kode;?>" method="post" name="form1" target="_self"> 
 				  <fieldset> 
 					<table class="table table-striped"> 
 						<?php 
+							buatInputHidden('idj',0,$Kode); 
 							buatInputHidden($isian[1],1,$kode_pt); 
 							buatInputHidden($isian[2],2,$kode_fak); 
 							buatInputHidden($isian[3],3,$kode_jenjang); 
@@ -161,27 +193,27 @@ $max	 = ceil($jml/$row);
 							buatInputHidden($isian[5],5,$kode_prodi); 
 							buatInputHidden($isian[6],6,$tahun_id); 
 							buatInputHidden($isian[7],7,$semester); 
-							buatInputSelectKelas($isian[8],8,$data[8],"m_kelas",$koneksidb,"kode_prodi",$kode_prodi,'kelas');
+							buatInputHidden($isian[8],8,$kelas); 
 							buatInputHidden($isian[9],9,$_SESSION['USERMRZ']); 
-							buatInputText($isian[10],10,$hari); 
-							buatInputText($isian[11],11,date('Y/m/d')); 
+							buatInputTextBS($isian[10],10,$hari); 
+							buatInputTextBS($isian[11],11,date('Y/m/d')); 
 							buatInputSelectJam($isian[12],12,$data[12],"m_jam",$koneksidb,"kode_prodi",$kode_prodi,'mulai'); 
 							buatInputSelectJam($isian[13],13,$data[13],"m_jam",$koneksidb,"kode_prodi",$kode_prodi,'mulai'); 
-							buatInputText($isian[14],14,$data[14]); 
+							buatInputHidden($isian[14],14,'-'); 
 							buatInputSelectHadir($isian[15],15); 
-							buatInputSelectMatakuliah($isian[16],16,$data[16],"t_jadwal",$koneksidb,$kode_prodi,$tahun_id,$_SESSION['USERMRZ'],'nama_mk'); 
-							buatInputText($isian[17],17,$data[17]); 
-							buatInputText($isian[18],18,$data[18]); 
-							buatInputText($isian[19],19,$data[19]); 
-							buatInputText($isian[20],20,$data[20]); 
+							buatInputHidden($isian[16],16,$kode_mk); 
+							buatInputTextBS($isian[17],17,$data[17]); 
+							buatInputHidden($isian[18],18,'N'); 
+							buatInputHidden($isian[19],19,'0000/00/00'); 
+							buatInputHidden($isian[20],20,'-'); 
 							//buatInputSelect($isian[7],7,$data[7],"tFakultas",$koneksidb,"Fakultas"); 
 						?> 
 						<tr> 
 							 <td>&nbsp;</td> 
 							 <td>&nbsp;</td> 
 							 <td><button type="submit"  name="btnSave" class="btn btn-primary">Simpan</button> 
-								<button type="reset" class="btn " name="reset" id="reset" onclick="return confirm('Reset data yang telah anda ketik?')"/>Reset</button> 
-							  	<a class="toggle-link" href="#new-project"><button type="button" class="btn " name=" KEMBALI " id="cancel" value=" BATAL " /><!-- onclick="history.back();" --> Batal </button></a> 
+								<!-- <button type="reset" class="btn " name="reset" id="reset" onclick="return confirm('Reset data yang telah anda ketik?')"/>Reset</button>  -->
+							  	<!-- <a class="toggle-link" href="#new-project"><button type="button" class="btn " name=" KEMBALI " id="cancel" value=" BATAL " />onclick="history.back();" Batal </button></a>  -->
 							 </td> 
 						</tr> 
 					 </table> 
@@ -193,21 +225,13 @@ $max	 = ceil($jml/$row);
 </div>		 
 <table class="table table-bordered table-striped"> 
 	<tr> 
-		<th width="60" align="center"><strong>No</strong></th> 
-		<th><strong><?php echo $isian[8]; ?></strong></th> 
-		<th><strong><?php echo $isian[9]; ?></strong></th> 
-		<th><strong><?php echo $isian[10]; ?></strong></th> 
+		<th width="30" align="center"><strong>No</strong></th> 
 		<th><strong><?php echo $isian[11]; ?></strong></th> 
-		<th><strong><?php echo $isian[12]; ?></strong></th> 
-		<th><strong><?php echo $isian[13]; ?></strong></th> 
-		<th><strong><?php echo $isian[14]; ?></strong></th> 
-		<th><strong><?php echo $isian[15]; ?></strong></th> 
-		<th><strong><?php echo $isian[16]; ?></strong></th> 
 		<th><strong><?php echo $isian[17]; ?></strong></th> 
 		<th width="10" colspan="2"><strong>Option</strong></td> 
 	</tr> 
 <?php 
-tampilTabel($koneksidb,$pageSql,$field,$formName,$hal,$row); 
+tampilTabelPresensi($koneksidb,$pageSql,$field,$formName,$hal,$row); 
 ?> 
 </table> 
 <?php tabelFooter($jml,$row,$max,$formName,$hal) ?> 
