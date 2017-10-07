@@ -738,34 +738,28 @@ function buatInputSelectJam($isian,$i,$data,$namaTable,$koneksidb,$field,$kondis
 									</div>  \n");
 }
 
-function buatInputSelectMatakuliah($isian,$i,$data,$namaTable,$koneksidb,$kode_prodi,$tahun_id,$NIDN,$orderby){
-	echo("						<tr> \n");
-	echo("							<td width=\"24%\"><b>".$isian."</b></td>  \n");
-	echo("							<td width=\"2%\"><b>:</b></td>  \n");
-	echo("							<td width=\"74%\">
-										<select name=\"txt".$i."\" class=\"span6\">");	
-	$mySql = "SELECT $namaTable.*, m_mata_kuliah.nama_mk, m_mata_kuliah.kode_mk, m_kelas.idk, m_kelas.kelas FROM ".$namaTable." 
-					INNER JOIN m_mata_kuliah ON m_mata_kuliah.kode_mk = t_jadwal.kode_mk 
-					INNER JOIN m_kelas ON t_jadwal.kelas = m_kelas.idk GROUP BY idj  HAVING $namaTable.kode_prodi='$kode_prodi' AND $namaTable.tahun_id = '$tahun_id' AND $namaTable.NIDN = '$NIDN' AND $namaTable.kode_mk = m_mata_kuliah.kode_mk ORDER BY ".$orderby." ASC";										
+function buatInputSelectMatakuliah($isian,$i,$data,$koneksidb,$kode_prodi,$tahun_id,$orderby){
+	echo("						<div class=\"form-group\"> \n");
+	echo("							<label for=\"txt".$i."\">$isian</label>  \n
+										<select name=\"txt".$i."\" >");	
+	$mySql = "SELECT m_mata_kuliah.*, m_program_studi.* FROM m_mata_kuliah INNER JOIN m_program_studi ON m_mata_kuliah.kode_prodi = m_program_studi.kode_prodi
+					 GROUP BY kode_mk  HAVING m_mata_kuliah.kode_prodi='$kode_prodi'  ORDER BY ".$orderby." ASC";										
 	$myQry = mysqli_query($koneksidb, $mySql) or die ("Gagal Query ruangan  ".$mySql);										
 	while ($kolomData1 = mysqli_fetch_array($myQry)) {
-		if ($data == $kolomData1['idj']) {
+		if ($data == $kolomData1['kode_mk']) {
 			$cek = "selected";
 		} else { $cek=""; }											
-		echo "<option value='$kolomData1[idj]' $cek>$kolomData1[kode_mk] - $kolomData1[nama_mk] - $kolomData1[kelas] </option>";
+		echo "<option value='$kolomData1[idj]' $cek>$kolomData1[kode_mk] - $kolomData1[nama_mk] - SMT$kolomData1[semester] </option>";
 	}
 	echo("								</select>
-									</td>  \n");
-	echo("						</tr> \n");
+									</div>  \n");
 }
 
-function buatInputSelectKelas($isian,$i,$data,$namaTable,$koneksidb,$field,$kondisi,$orderby){
-	echo("						<tr> \n");
-	echo("							<td width=\"24%\"><b>".$isian."</b></td>  \n");
-	echo("							<td width=\"2%\"><b>:</b></td>  \n");
-	echo("							<td width=\"74%\">
-										<select name=\"txt".$i."\" class=\"span4\">");	
-	$mySql = "SELECT * FROM ".$namaTable." WHERE $field = '$kondisi' AND kelas != 'SEMINAR' AND kelas !='SKRIPSI' AND kelas !='KERJA PRAKTEK' ORDER BY ".$orderby." ASC";										
+function buatInputSelectKelas($isian,$i,$data,$koneksidb,$field,$kondisi,$orderby){
+	echo("						<div class=\"form-group\"> \n");
+	echo("							<label for=\"txt".$i."\">$isian</label>  \n
+										<select name=\"txt".$i."\" >");	
+	$mySql = "SELECT * FROM m_kelas WHERE $field = '$kondisi'  ORDER BY ".$orderby." ASC";										
 	$myQry = mysqli_query($koneksidb, $mySql) or die ("Gagal Query ruangan  ".$mySql);										
 	while ($kolomData1 = mysqli_fetch_array($myQry)) {
 		if ($data == $kolomData1['idk']) {
@@ -774,8 +768,7 @@ function buatInputSelectKelas($isian,$i,$data,$namaTable,$koneksidb,$field,$kond
 		echo "<option value='$kolomData1[idk]' $cek>$kolomData1[kelas] </option>";
 	}
 	echo("								</select>
-									</td>  \n");
-	echo("						</tr> \n");
+									</div>  \n");
 }
 
 function tampilTabel1($koneksidb,$pageSql,$field,$formName,$hal,$row){

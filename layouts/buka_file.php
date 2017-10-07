@@ -107,7 +107,37 @@ if($_GET) {
 			if(!file_exists ('pages/masters/presensi_delete.php')) include "pages/404.php"; 
 			include 'pages/masters/presensi_delete.php'; break;
   						
+ 
+			case 'Jadwal-Data' :			
+			if(!file_exists ('pages/masters/jadwal_data.php')) include "pages/404.php"; 
+			include 'pages/masters/jadwal_data.php'; break;
+  
+			case 'Jadwal-Edit' :		
+			if(!file_exists ('pages/masters/jadwal_edit.php')) include "pages/404.php"; 
+			include 'pages/masters/jadwal_edit.php'; break;
+  
+			case 'Jadwal-Delete' :			
+			if(!file_exists ('pages/masters/jadwal_delete.php')) include "pages/404.php"; 
+			include 'pages/masters/jadwal_delete.php'; break;
+  						
+ 
+			case 'Jadwal-Data' :			
+			if(!file_exists ('pages/masters/jadwal_data.php')) include "pages/404.php"; 
+			include 'pages/masters/jadwal_data.php'; break;
+  
+			case 'Jadwal-Edit' :		
+			if(!file_exists ('pages/masters/jadwal_edit.php')) include "pages/404.php"; 
+			include 'pages/masters/jadwal_edit.php'; break;
+  
+			case 'Jadwal-Delete' :			
+			if(!file_exists ('pages/masters/jadwal_delete.php')) include "pages/404.php"; 
+			include 'pages/masters/jadwal_delete.php'; break;
+  						
 			#MARKER 
+
+			
+
+			
 
 			
 
