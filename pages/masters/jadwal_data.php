@@ -100,7 +100,11 @@ if($_GET) {
 } 
 $row = 20; 
 $hal = isset($_GET['hal']) ? $_GET['hal'] : 0; 
-$pageSql = "SELECT $tableName.* FROM ".$tableName; 
+$pageSql = "SELECT $tableName.*, m_kelas.kelas, m_dosen.nama_dosen, m_mata_kuliah.nama_mk FROM ".$tableName." 
+				INNER JOIN m_kelas ON t_jadwal.kelas = m_kelas.idk 
+				INNER JOIN m_dosen ON t_jadwal.nidn = m_dosen.nidn
+				INNER JOIN m_mata_kuliah ON t_jadwal.kode_mk = m_mata_kuliah.kode_mk
+				GROUP BY idj"; 
  
 if(isset($_POST['qcari'])){ 
   $qcari=$_POST['qcari']; 
@@ -116,9 +120,9 @@ $max	 = ceil($jml/$row);
 <table class="table table-striped"> 
 	<tr> 
 	  <td colspan="2"><h1><b> <?php echo $formName;?> </b>  
-	  <form class="navbar-search pull-right"  method="POST" action="?page=<?php echo $formName?>-Data">  
+	  <!-- <form class="navbar-search pull-right"  method="POST" action="?page=<?php echo $formName?>-Data">  
 		  <input type="text" name="qcari" placeholder="Cari..." autofocus/> 
-	  </form></h1> </td> 
+	  </form></h1> </td>  -->
 	</tr> 
 </table> 
 <div class="accordion" id="collapse-group">         
@@ -136,12 +140,12 @@ $max	 = ceil($jml/$row);
 				  <fieldset> 
 					<table class="table table-striped"> 
 						<?php 
-							buatInputHidden($isian[1],1,$data[1]); 
-							buatInputHidden($isian[2],2,$data[2]); 
-							buatInputHidden($isian[3],3,$data[3]); 
-							buatInputHidden($isian[4],4,$data[4]); 
-							buatInputHidden($isian[5],5,$data[5]); 
-							buatInputHidden($isian[6],6,$data[6]); 
+							buatInputHidden($isian[1],1,$kode_pt); 
+							buatInputHidden($isian[2],2,$kode_fak); 
+							buatInputHidden($isian[3],3,$kode_jenjang); 
+							buatInputHidden($isian[4],4,$kode_jurusan); 
+							buatInputHidden($isian[5],5,$kode_prodi); 
+							buatInputHidden($isian[6],6,$tahun_id); 
 							buatInputTextBS($isian[7],7,$data[7]); 
 							buatInputSelectKelas($isian[8],8,$data[8],$koneksidb,'kode_prodi',$kode_prodi,'kelas');
 							buatInputSelectMatakuliah($isian[9],9,$data[9],$koneksidb,$kode_prodi,$tahun_id,'nama_mk');
@@ -149,12 +153,12 @@ $max	 = ceil($jml/$row);
 							buatInputTextBS($isian[11],11,$data[11]); 
 							buatInputTextBS($isian[12],12,$data[12]); 
 							buatInputSelectDosen($isian[13],13,$data[13],$koneksidb,$kode_fak,$tahun_id,'nama_dosen'); 
-							buatInputTextBS($isian[14],14,$data[14]); 
-							buatInputTextBS($isian[15],15,$data[15]); 
-							buatInputTextBS($isian[16],16,$data[16]); 
-							buatInputTextBS($isian[17],17,$data[17]); 
-							buatInputTextBS($isian[18],18,$data[18]); 
-							buatInputTextBS($isian[19],19,$data[19]); 
+							buatInputHidden($isian[14],14,$data[14]); 
+							buatInputHidden($isian[15],15,$data[15]); 
+							buatInputHidden($isian[16],16,$data[16]); 
+							buatInputHidden($isian[17],17,$data[17]); 
+							buatInputHidden($isian[18],18,$data[18]); 
+							buatInputHidden($isian[19],19,$data[19]); 
 							buatInputSelectKK($isian[20],20,$data[20],$koneksidb,'nama'); 
 							//buatInputSelect($isian[7],7,$data[7],"tFakultas",$koneksidb,"Fakultas"); 
 						?> 
@@ -176,28 +180,14 @@ $max	 = ceil($jml/$row);
 <table class="table table-bordered table-striped"> 
 	<tr> 
 		<th width="60" align="center"><strong>No</strong></th> 
-		<th><strong><?php echo $isian[3]; ?></strong></th> 
-		<th><strong><?php echo $isian[4]; ?></strong></th> 
-		<th><strong><?php echo $isian[5]; ?></strong></th> 
-		<th><strong><?php echo $isian[6]; ?></strong></th> 
-		<th><strong><?php echo $isian[7]; ?></strong></th> 
-		<th><strong><?php echo $isian[8]; ?></strong></th> 
-		<th><strong><?php echo $isian[9]; ?></strong></th> 
-		<th><strong><?php echo $isian[10]; ?></strong></th> 
-		<th><strong><?php echo $isian[11]; ?></strong></th> 
-		<th><strong><?php echo $isian[12]; ?></strong></th> 
-		<th><strong><?php echo $isian[13]; ?></strong></th> 
-		<th><strong><?php echo $isian[14]; ?></strong></th> 
-		<th><strong><?php echo $isian[15]; ?></strong></th> 
-		<th><strong><?php echo $isian[16]; ?></strong></th> 
-		<th><strong><?php echo $isian[17]; ?></strong></th> 
-		<th><strong><?php echo $isian[18]; ?></strong></th> 
-		<th><strong><?php echo $isian[19]; ?></strong></th> 
-		<th><strong><?php echo $isian[20]; ?></strong></th> 
+		<th><strong>Kelas</strong></th> 
+		<th><strong>Semester</strong></th> 
+		<th><strong>Mata Kuliah</strong></th> 
+		<th><strong>Nama Dosen</strong></th> 
 		<th width="10" colspan="2"><strong>Option</strong></td> 
 	</tr> 
 <?php 
-tampilTabel($koneksidb,$pageSql,$field,$formName,$hal,$row); 
+tampilTabelJadwal($koneksidb,$pageSql,$field,$formName,$hal,$row); 
 ?> 
 </table> 
 <?php tabelFooter($jml,$row,$max,$formName,$hal) ?> 

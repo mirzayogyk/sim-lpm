@@ -67,8 +67,9 @@ if($_GET) {
 					if($loginData['level']=="DOSEN") {
 						$_SESSION['dosen'] = $loginData['level'];
 					}
-					if($loginData['level']=="KETUA KELAS") {
+					if($loginData['level']=="MAHASISWA") {
 						$_SESSION['ketuakelas'] = $loginData['level'];
+						$_SESSION['userid'] = $loginData['userid'];
 					}
 					if($loginData['level']=="OPERATOR") {
 						$_SESSION['operator'] = $loginData['level'];

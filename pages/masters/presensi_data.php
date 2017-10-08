@@ -161,11 +161,11 @@ $max	 = ceil($jml/$row);
 	  	<h5><b> <?php echo $kode_mk." - ".$nama_mk." - ".$kelas_nama;?> </b> </h5> 
 	  </td> 
 	</tr> 
-		<td>
+		<!-- <td>
 			<form class="navbar-search pull-right"  method="POST" action="?page=<?php echo $formName?>-Data">  
 				<input type="text" name="qcari" placeholder="Cari..." autofocus/> 
 			</form>
-		</td>
+		</td> -->
 	<tr> 
 
 	</tr>
@@ -228,6 +228,7 @@ $max	 = ceil($jml/$row);
 		<th width="30" align="center"><strong>No</strong></th> 
 		<th><strong><?php echo $isian[11]; ?></strong></th> 
 		<th><strong><?php echo $isian[17]; ?></strong></th> 
+		<th><strong>Status	</strong></th> 
 		<th width="10" colspan="2"><strong>Option</strong></td> 
 	</tr> 
 <?php 

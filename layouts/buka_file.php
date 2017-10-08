@@ -19,9 +19,13 @@ if($_GET) {
 			if(!file_exists ("pages/home.php")) die ("Sorry Empty Page!"); 
 			include "pages/home.php";	break;		
 
-			case 'Home-Dosen' :				
+		case 'Home-Dosen' :				
 			if(!file_exists ("pages/home_dosen.php")) die ("Sorry Empty Page!"); 
 			include "pages/home_dosen.php";	break;	
+
+		case 'Home-KK' :				
+			if(!file_exists ("pages/home_kk.php")) die ("Sorry Empty Page!"); 
+			include "pages/home_kk.php";	break;	
 
 		case 'Terima-Kasih' :				
 			if(!file_exists ("page/terima_kasih.php")) die ("Sorry Empty Page!"); 
@@ -60,6 +64,10 @@ if($_GET) {
 			include "pages/login_out.php"; break;		
   						
  
+			case 'Presensi-Data-Admin' :			
+			if(!file_exists ('pages/masters/presensi_data.php')) include "pages/404.php"; 
+			include 'pages/masters/presensi_data.php'; break;
+
 			case 'Presensi-Data' :			
 			if(!file_exists ('pages/masters/presensi_data.php')) include "pages/404.php"; 
 			include 'pages/masters/presensi_data.php'; break;

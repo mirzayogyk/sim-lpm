@@ -783,10 +783,10 @@ function buatInputSelectDosen($isian,$i,$data,$koneksidb,$kode_prodi,$tahun_id,$
 	$mySql = "SELECT * FROM m_dosen WHERE m_dosen.kode_fak='$kode_prodi' AND status_aktif='A'  ORDER BY ".$orderby." ASC";										
 	$myQry = mysqli_query($koneksidb, $mySql) or die ("Gagal Query ruangan  ".$mySql);										
 	while ($kolomData1 = mysqli_fetch_array($myQry)) {
-		if ($data == $kolomData1['idd']) {
+		if ($data == $kolomData1['NIDN']) {
 			$cek = "selected";
 		} else { $cek=""; }											
-		echo "<option value='$kolomData1[idd]' $cek>$kolomData1[NIDN]  $kolomData1[nama_dosen] </option>";
+		echo "<option value='$kolomData1[NIDN]' $cek>$kolomData1[NIDN]  $kolomData1[nama_dosen] </option>";
 	}
 	echo("								</select>
 									</div>  \n");
@@ -796,7 +796,7 @@ function buatInputSelectKK($isian,$i,$data,$koneksidb,$orderby){
 	echo("						<div class=\"form-group\"> \n");
 	echo("							<label for=\"txt".$i."\">$isian</label>  \n
 										<select name=\"txt".$i."\" >");	
-	$mySql = "SELECT * FROM user WHERE level='KETUA KELAS'  ORDER BY ".$orderby." ASC";										
+	$mySql = "SELECT * FROM user WHERE level='MAHASISWA'  ORDER BY ".$orderby." ASC";										
 	$myQry = mysqli_query($koneksidb, $mySql) or die ("Gagal Query ruangan  ".$mySql);										
 	while ($kolomData1 = mysqli_fetch_array($myQry)) {
 		if ($data == $kolomData1['userid']) {
@@ -841,6 +841,25 @@ function tampilTabel1($koneksidb,$pageSql,$field,$formName,$hal,$row){
 		echo("</tr>");	
 	}
 }
+
+function tampilTabelKK($koneksidb,$pageSql,$field,$formName,$hal,$row){
+	$mySql = $pageSql." ORDER BY ".$field[4]." ASC LIMIT $hal, $row";
+	$myQry = mysqli_query($koneksidb, $mySql)  or die ("Query salah : ".$mySql);
+	$nomor  = 1+$hal; 
+	$i=0;
+	while ($kolomData = mysqli_fetch_array($myQry)) {
+		$Kode = $kolomData['idj'];
+		echo("<tr>");
+		echo("<td align=\"center\">".$nomor++."</td>");
+			echo("<td> ".$kolomData[$field[4]]." -  <b>".$kolomData['kelas']."</b> - $kolomData[nama_dosen] </td>");
+			$i++;
+		
+		echo("</td>");	
+		echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Data&Kode=".$Kode." \" target=\"_self\"><i class=\"icon-edit\"></i></a></td>");
+		echo("</tr>");	
+	}
+}
+
 function tampilTabelPresensi($koneksidb,$pageSql,$field,$formName,$hal,$row,$id){
 	$mySql = $pageSql." ORDER BY tanggal ASC LIMIT $hal, $row";
 	$myQry = mysqli_query($koneksidb, $mySql)  or die ("Query salah : ".$mySql);
@@ -852,12 +871,34 @@ function tampilTabelPresensi($koneksidb,$pageSql,$field,$formName,$hal,$row,$id)
 		echo("<td align=\"center\">".$nomor++."</td>");
 			echo("<td> ".$kolomData['tanggal']."</b> </td>");
 			echo("<td> ".$kolomData['bahasan']."</b> </td>");
+			echo("<td> ".$kolomData['verifikasi_status']."</b> </td>");
 			$i++;
 		
 		echo("</td>");	
-		//echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Data&Kode=".$Kode." \" target=\"_self\"><i class=\"icon-eye-open\"></i></a></td>");
 		echo("<td class=\"cc\" align=\"center\"><a href=\"# \" target=\"_self\"><i class=\"icon-eye-open\"></i></a></td>");
 		echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Delete&id=".$id."&Kode=".$Kode." \" onclick=\"return confirm('Anda Yakin menghapus Data ? ')\"><i class=\"icon-trash\"></i></a></td>");
+		echo("</tr>");	
+	}
+}
+
+function tampilTabelJadwal($koneksidb,$pageSql,$field,$formName,$hal,$row){
+	$mySql = $pageSql." ORDER BY semester,kode_mk ASC LIMIT $hal, $row";
+	$myQry = mysqli_query($koneksidb, $mySql)  or die ("Query salah : ".$mySql);
+	$nomor  = 1+$hal; 
+	$i=0;
+	while ($kolomData = mysqli_fetch_array($myQry)) {
+		$Kode = $kolomData['idj'];
+		echo("<tr>");
+		echo("<td align=\"center\">".$nomor++."</td>");
+			echo("<td> ".$kolomData['kelas']."</b> </td>");
+			echo("<td> ".$kolomData['semester']."</b> </td>");
+			echo("<td> ".$kolomData['nama_mk']."</b> </td>");
+			echo("<td> ".$kolomData['nama_dosen']."</b> </td>");
+			$i++;
+		
+		echo("</td>");	
+		echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Edit&Kode=".$Kode." \" target=\"_self\"><i class=\"icon-edit\"></i></a></td>");
+		echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Delete&Kode=".$Kode." \" onclick=\"return confirm('Anda Yakin menghapus Data ? ')\"><i class=\"icon-trash\"></i></a></td>");
 		echo("</tr>");	
 	}
 }

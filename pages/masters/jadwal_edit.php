@@ -64,6 +64,22 @@ $Kode	 = isset($_GET['Kode']) ?  $_GET['Kode'] : $_POST['txt0'];
 $sqlShow = "SELECT * FROM ".$tableName." WHERE ".$field[0]."='$Kode'";
 $qryShow = mysqli_query($koneksidb, $sqlShow)  or die ("Query ambil data salah : ".mysql_error());
 $dataShow = mysqli_fetch_array($qryShow);
+
+$kode_prodi = $_SESSION['PRODIMRZ'];
+$cariSql = "SELECT m_program_studi.* FROM m_program_studi WHERE kode_prodi=$kode_prodi"; 
+$cariQry = mysqli_query($koneksidb, $cariSql) or die ("error cari: ".$cariSql); 
+while ($hasilCari = mysqli_fetch_array($cariQry)) {
+	$kode_pt = $hasilCari['kode_pt'];
+	$kode_fak = $hasilCari['kode_fak'];
+	$kode_jenjang = $hasilCari['kode_jenjang'];
+	$kode_jurusan = $hasilCari['kode_jurusan'];
+};
+
+$cariSql = "SELECT m_tahun.* FROM m_tahun WHERE buka='Y'"; 
+$cariQry = mysqli_query($koneksidb, $cariSql) or die ("error cari: ".$cariSql); 
+while ($hasilCari = mysqli_fetch_array($cariQry)) {
+	$tahun_id = $hasilCari['tahun_id'];
+}
  
 for($i=0;$i<=$jmlField;$i++){
 	$data[$i] = $dataShow[$field[$i]];
@@ -73,31 +89,31 @@ for($i=0;$i<=$jmlField;$i++){
 <form  class="form-horizontal" action="?page=<?php echo $formName;?>-Edit" method="post" name="form1" target="_self" id="form1">  
 <fieldset> 
 	<legend>Ubah <?php echo $formName?></legend> 
-		<div class="control-group"> 
-			<label class="control-label" for="input00"><?php echo $isian[0]; ?></label>  
-			<div class="controls">  
-				<input name="txt0" type="text" class="input-xlarge" id="input00" value="<?php echo $Kode; ?>"  size="60" maxlength="50" readonly />  
-			</div> 
+		<div class="form-group"> 
+			<label for="input00"><?php echo $isian[0]; ?></label>  
+			<input name="txt0" type="text" class="form-control" id="input00" value="<?php echo $Kode; ?>"  size="60" maxlength="50" readonly />  
 		</div> 
 		<?php 
-		buatEditText($isian[3],3,$data[3]); 
-		buatEditText($isian[4],4,$data[4]); 
-		buatEditText($isian[5],5,$data[5]); 
-		buatEditText($isian[6],6,$data[6]); 
-		buatEditText($isian[7],7,$data[7]); 
-		buatEditText($isian[8],8,$data[8]); 
-		buatEditText($isian[9],9,$data[9]); 
-		buatEditText($isian[10],10,$data[10]); 
-		buatEditText($isian[11],11,$data[11]); 
-		buatEditText($isian[12],12,$data[12]); 
-		buatEditText($isian[13],13,$data[13]); 
-		buatEditText($isian[14],14,$data[14]); 
-		buatEditText($isian[15],15,$data[15]); 
-		buatEditText($isian[16],16,$data[16]); 
-		buatEditText($isian[17],17,$data[17]); 
-		buatEditText($isian[18],18,$data[18]); 
-		buatEditText($isian[19],19,$data[19]); 
-		buatEditText($isian[20],20,$data[20]); 
+							buatInputHidden($isian[1],1,$kode_pt); 
+							buatInputHidden($isian[2],2,$kode_fak); 
+							buatInputHidden($isian[3],3,$kode_jenjang); 
+							buatInputHidden($isian[4],4,$kode_jurusan); 
+							buatInputHidden($isian[5],5,$kode_prodi); 
+							buatInputHidden($isian[6],6,$tahun_id); 
+							buatInputTextBS($isian[7],7,$data[7]); 
+							buatInputSelectKelas($isian[8],8,$data[8],$koneksidb,'kode_prodi',$kode_prodi,'kelas');
+							buatInputSelectMatakuliah($isian[9],9,$data[9],$koneksidb,$kode_prodi,$tahun_id,'nama_mk');
+							buatInputSelectHari($isian[10],10,$data[10]); 
+							buatInputTextBS($isian[11],11,$data[11]); 
+							buatInputTextBS($isian[12],12,$data[12]); 
+							buatInputSelectDosen($isian[13],13,$data[13],$koneksidb,$kode_fak,$tahun_id,'nama_dosen'); 
+							buatInputHidden($isian[14],14,$data[14]); 
+							buatInputHidden($isian[15],15,$data[15]); 
+							buatInputHidden($isian[16],16,$data[16]); 
+							buatInputHidden($isian[17],17,$data[17]); 
+							buatInputHidden($isian[18],18,$data[18]); 
+							buatInputHidden($isian[19],19,$data[19]); 
+							buatInputSelectKK($isian[20],20,$data[20],$koneksidb,'nama'); 
 		?> 
 <div class="form-actions"> 
 							<button type="submit"  name="btnSave" class="btn btn-primary">Simpan</button> 
