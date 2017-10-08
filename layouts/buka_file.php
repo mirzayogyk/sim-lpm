@@ -19,13 +19,17 @@ if($_GET) {
 			if(!file_exists ("pages/home.php")) die ("Sorry Empty Page!"); 
 			include "pages/home.php";	break;		
 
+			case 'Home-Dosen' :				
+			if(!file_exists ("pages/home_dosen.php")) die ("Sorry Empty Page!"); 
+			include "pages/home_dosen.php";	break;	
+
 		case 'Terima-Kasih' :				
 			if(!file_exists ("page/terima_kasih.php")) die ("Sorry Empty Page!"); 
 			include "page/terima_kasih.php";	break;
 		
 		case 'Login' :				
 			if(!file_exists ("superadmin/index.php")) die ("Sorry Empty Page!"); 
-			include "superadmin/index.php";	break;
+			echo "<meta http-equiv='refresh' content='0; url=superadmin/index.php'>"; 	break;
 			
 		case 'Generator' :				
 			if(!file_exists ("pages/generator.php")) die ("Sorry Empty Page!"); 
@@ -54,45 +58,6 @@ if($_GET) {
 		case 'Logout' :				
 			if(!file_exists ("pages/login_out.php")) die ("Sorry Empty Page!"); 
 			include "pages/login_out.php"; break;		
-  						
- 
-			case 'Fakultas-Data' :			
-			if(!file_exists ('pages/masters/fakultas_data.php')) include "pages/404.php"; 
-			include 'pages/masters/fakultas_data.php'; break;
-  
-			case 'Fakultas-Edit' :		
-			if(!file_exists ('pages/masters/fakultas_edit.php')) include "pages/404.php"; 
-			include 'pages/masters/fakultas_edit.php'; break;
-  
-			case 'Fakultas-Delete' :			
-			if(!file_exists ('pages/masters/fakultas_delete.php')) include "pages/404.php"; 
-			include 'pages/masters/fakultas_delete.php'; break;
-  						
- 
-			case 'Prodi-Data' :			
-			if(!file_exists ('pages/masters/prodi_data.php')) include "pages/404.php"; 
-			include 'pages/masters/prodi_data.php'; break;
-  
-			case 'Prodi-Edit' :		
-			if(!file_exists ('pages/masters/prodi_edit.php')) include "pages/404.php"; 
-			include 'pages/masters/prodi_edit.php'; break;
-  
-			case 'Prodi-Delete' :			
-			if(!file_exists ('pages/masters/prodi_delete.php')) include "pages/404.php"; 
-			include 'pages/masters/prodi_delete.php'; break;
-  						
- 
-			case 'Tahun-Data' :			
-			if(!file_exists ('pages/masters/tahun_data.php')) include "pages/404.php"; 
-			include 'pages/masters/tahun_data.php'; break;
-  
-			case 'Tahun-Edit' :		
-			if(!file_exists ('pages/masters/tahun_edit.php')) include "pages/404.php"; 
-			include 'pages/masters/tahun_edit.php'; break;
-  
-			case 'Tahun-Delete' :			
-			if(!file_exists ('pages/masters/tahun_delete.php')) include "pages/404.php"; 
-			include 'pages/masters/tahun_delete.php'; break;
   						
  
 			case 'Presensi-Data' :			
@@ -135,33 +100,7 @@ if($_GET) {
   						
 			#MARKER 
 
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-
-			
+		
 	}
 }
 else {

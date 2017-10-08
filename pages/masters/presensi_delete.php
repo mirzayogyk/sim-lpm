@@ -12,7 +12,8 @@ if($_GET) {
 		$myQry = mysqli_query($koneksidb,$mySql) or die ("Eror hapus data".mysql_error());  
 		if($myQry){  
 		buatLog($_SESSION['USERMRZ'],"DELETE SUCCESS",$mySql); 
-			echo "<meta http-equiv='refresh' content='0; url=?page=".$formName."-Data'>";  
+		$id=$_GET['id'];
+		echo "<meta http-equiv='refresh' content='0; url=?page=".$formName."-Data&Kode=$id'>"; 
 		} 
 	} 
 } 

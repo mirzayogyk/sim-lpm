@@ -642,6 +642,13 @@ function buatInputTextBS($text,$i,$data){
 	echo("						</div> \n");
 } 
 
+function buatInputTextAreaBS($text,$i,$data){
+	echo("						<div class=\"form-group\"> \n");
+	echo("							<label for=\"txt".$i."\">$text</label>  \n");
+	echo("							<textarea class=\"form-control\"  name=\"txt".$i."\" id=\"txt".$i."\" rows=\"5\" >$data</textarea>  \n");
+	echo("						</div> \n");
+} 
+
 function buatInputHidden($text,$i,$data){
 	echo("							<input name=\"txt".$i."\" type=\"hidden\" class=\"input-xxlarge\" value=\"".$data."\" size=\"60\" maxlength=\"60\"  />  \n");
 }
@@ -722,6 +729,20 @@ function buatInputSelectHadir($isian,$i){
 								</div>  \n");
 }
 
+function buatInputSelectHari($isian,$i){
+	echo("						<div class=\"form-group\"> \n");
+	echo("							<label for=\"txt".$i."\">$isian</label>  \n
+										<select name=\"txt".$i."\" >");											
+	echo "									<option value='SENIN' selected>SENIN</option>";
+	echo "									<option value='SELASA' >SELASA</option>";
+	echo "									<option value='RABU' >RABU</option>";
+	echo "									<option value='KAMIS' >KAMIS</option>";
+	echo "									<option value='JUMAT' >JUMAT</option>";
+	echo "									<option value='SABTU' >SABTU</option>";	
+	echo("								</select>\n
+								</div>  \n");
+}
+
 function buatInputSelectJam($isian,$i,$data,$namaTable,$koneksidb,$field,$kondisi,$orderby){
 	echo("						<div class=\"form-group\"> \n");
 	echo("							<label for=\"txt".$i."\">$isian</label>  \n
@@ -749,7 +770,39 @@ function buatInputSelectMatakuliah($isian,$i,$data,$koneksidb,$kode_prodi,$tahun
 		if ($data == $kolomData1['kode_mk']) {
 			$cek = "selected";
 		} else { $cek=""; }											
-		echo "<option value='$kolomData1[idj]' $cek>$kolomData1[kode_mk] - $kolomData1[nama_mk] - SMT$kolomData1[semester] </option>";
+		echo "<option value='$kolomData1[kode_mk]' $cek>$kolomData1[kode_mk] \n $kolomData1[nama_mk] \n SMT$kolomData1[semester] </option>";
+	}
+	echo("								</select>
+									</div>  \n");
+}
+
+function buatInputSelectDosen($isian,$i,$data,$koneksidb,$kode_prodi,$tahun_id,$orderby){
+	echo("						<div class=\"form-group\"> \n");
+	echo("							<label for=\"txt".$i."\">$isian</label>  \n
+										<select name=\"txt".$i."\" >");	
+	$mySql = "SELECT * FROM m_dosen WHERE m_dosen.kode_fak='$kode_prodi' AND status_aktif='A'  ORDER BY ".$orderby." ASC";										
+	$myQry = mysqli_query($koneksidb, $mySql) or die ("Gagal Query ruangan  ".$mySql);										
+	while ($kolomData1 = mysqli_fetch_array($myQry)) {
+		if ($data == $kolomData1['idd']) {
+			$cek = "selected";
+		} else { $cek=""; }											
+		echo "<option value='$kolomData1[idd]' $cek>$kolomData1[NIDN]  $kolomData1[nama_dosen] </option>";
+	}
+	echo("								</select>
+									</div>  \n");
+}
+
+function buatInputSelectKK($isian,$i,$data,$koneksidb,$orderby){
+	echo("						<div class=\"form-group\"> \n");
+	echo("							<label for=\"txt".$i."\">$isian</label>  \n
+										<select name=\"txt".$i."\" >");	
+	$mySql = "SELECT * FROM user WHERE level='KETUA KELAS'  ORDER BY ".$orderby." ASC";										
+	$myQry = mysqli_query($koneksidb, $mySql) or die ("Gagal Query ruangan  ".$mySql);										
+	while ($kolomData1 = mysqli_fetch_array($myQry)) {
+		if ($data == $kolomData1['userid']) {
+			$cek = "selected";
+		} else { $cek=""; }											
+		echo "<option value='$kolomData1[userid]' $cek>$kolomData1[username] - $kolomData1[nama] </option>";
 	}
 	echo("								</select>
 									</div>  \n");
@@ -788,7 +841,7 @@ function tampilTabel1($koneksidb,$pageSql,$field,$formName,$hal,$row){
 		echo("</tr>");	
 	}
 }
-function tampilTabelPresensi($koneksidb,$pageSql,$field,$formName,$hal,$row){
+function tampilTabelPresensi($koneksidb,$pageSql,$field,$formName,$hal,$row,$id){
 	$mySql = $pageSql." ORDER BY tanggal ASC LIMIT $hal, $row";
 	$myQry = mysqli_query($koneksidb, $mySql)  or die ("Query salah : ".$mySql);
 	$nomor  = 1+$hal; 
@@ -802,8 +855,9 @@ function tampilTabelPresensi($koneksidb,$pageSql,$field,$formName,$hal,$row){
 			$i++;
 		
 		echo("</td>");	
-		echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Data&Kode=".$Kode." \" target=\"_self\"><i class=\"icon-eye\"></i></a></td>");
-		echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Data&Kode=".$Kode." \" target=\"_self\"><i class=\"icon-trash\"></i></a></td>");
+		//echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Data&Kode=".$Kode." \" target=\"_self\"><i class=\"icon-eye-open\"></i></a></td>");
+		echo("<td class=\"cc\" align=\"center\"><a href=\"# \" target=\"_self\"><i class=\"icon-eye-open\"></i></a></td>");
+		echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Delete&id=".$id."&Kode=".$Kode." \" onclick=\"return confirm('Anda Yakin menghapus Data ? ')\"><i class=\"icon-trash\"></i></a></td>");
 		echo("</tr>");	
 	}
 }

@@ -202,7 +202,7 @@ $max	 = ceil($jml/$row);
 							buatInputHidden($isian[14],14,'-'); 
 							buatInputSelectHadir($isian[15],15); 
 							buatInputHidden($isian[16],16,$kode_mk); 
-							buatInputTextBS($isian[17],17,$data[17]); 
+							buatInputTextAreaBS($isian[17],17,$data[17]); 
 							buatInputHidden($isian[18],18,'N'); 
 							buatInputHidden($isian[19],19,'0000/00/00'); 
 							buatInputHidden($isian[20],20,'-'); 
@@ -231,7 +231,7 @@ $max	 = ceil($jml/$row);
 		<th width="10" colspan="2"><strong>Option</strong></td> 
 	</tr> 
 <?php 
-tampilTabelPresensi($koneksidb,$pageSql,$field,$formName,$hal,$row); 
+tampilTabelPresensi($koneksidb,$pageSql,$field,$formName,$hal,$row,$Kode); 
 ?> 
 </table> 
 <?php tabelFooter($jml,$row,$max,$formName,$hal) ?> 
