@@ -18,7 +18,7 @@ a:hover {
 }
 /* Header */
 #header {
-    height: 50px;
+    height: 100px;
     position: relative;
     width: 100%;
     z-index: -9;
@@ -26,13 +26,13 @@ a:hover {
 
 #header h1 {
     /* background: url("../images/logo3.png") no-repeat scroll 0 0 transparent; */
-    height: 149px;
+    height: 79px;
     left: 15px;
     line-height: 600px;
     overflow: hidden;
     position: relative;
-    top:1px; 
-    width: 641px;
+    top:2px; 
+    width: 631px;
 }
 
 #header h1 a {
@@ -1259,7 +1259,7 @@ form {
 		left: auto;
 		right: auto;
 		width: 100%;
-		margin-top: -36px;  
+		margin-top: -76px;  
 		margin-bottom: 0px; background: rgba(46,64,153,0); float:right;
 	}
 	.navbar > .nav {
