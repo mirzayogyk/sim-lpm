@@ -104,7 +104,9 @@ $pageSql = "SELECT $tableName.*, m_kelas.kelas, m_dosen.nama_dosen, m_mata_kulia
 				INNER JOIN m_kelas ON t_jadwal.kelas = m_kelas.idk 
 				INNER JOIN m_dosen ON t_jadwal.nidn = m_dosen.nidn
 				INNER JOIN m_mata_kuliah ON t_jadwal.kode_mk = m_mata_kuliah.kode_mk
-				GROUP BY idj"; 
+				GROUP BY idj
+				HAVING kode_prodi = $kode_prodi
+				"; 
  
 if(isset($_POST['qcari'])){ 
   $qcari=$_POST['qcari']; 
