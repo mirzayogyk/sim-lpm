@@ -64,21 +64,29 @@ if($_GET) {
 			include "pages/login_out.php"; break;		
   						
  
-			case 'Presensi-Data-Admin' :			
+		case 'Presensi-Data-Admin' :			
 			if(!file_exists ('pages/masters/presensi_data.php')) include "pages/404.php"; 
 			include 'pages/masters/presensi_data.php'; break;
 
-			case 'Presensi-Data' :			
+		case 'Presensi-Data' :			
 			if(!file_exists ('pages/masters/presensi_data.php')) include "pages/404.php"; 
 			include 'pages/masters/presensi_data.php'; break;
   
-			case 'Presensi-Edit' :		
+		case 'Presensi-Edit' :		
 			if(!file_exists ('pages/masters/presensi_edit.php')) include "pages/404.php"; 
 			include 'pages/masters/presensi_edit.php'; break;
   
-			case 'Presensi-Delete' :			
+		case 'Presensi-Delete' :			
 			if(!file_exists ('pages/masters/presensi_delete.php')) include "pages/404.php"; 
 			include 'pages/masters/presensi_delete.php'; break;
+			
+		case 'Presensi-KK' :			
+			if(!file_exists ('pages/masters/presensi_kk.php')) include "pages/404.php"; 
+			include 'pages/masters/presensi_kk.php'; break;
+			
+		case 'Presensi-Confirm' :			
+			if(!file_exists ('pages/masters/presensi_confirm.php')) include "pages/404.php"; 
+			include 'pages/masters/presensi_confirm.php'; break;
   						
  
 			case 'Jadwal-Data' :			

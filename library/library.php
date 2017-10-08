@@ -855,7 +855,7 @@ function tampilTabelKK($koneksidb,$pageSql,$field,$formName,$hal,$row){
 			$i++;
 		
 		echo("</td>");	
-		echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Data&Kode=".$Kode." \" target=\"_self\"><i class=\"icon-edit\"></i></a></td>");
+		echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-KK&Kode=".$Kode." \" target=\"_self\"><i class=\"icon-edit\"></i></a></td>");
 		echo("</tr>");	
 	}
 }
@@ -877,6 +877,26 @@ function tampilTabelPresensi($koneksidb,$pageSql,$field,$formName,$hal,$row,$id)
 		echo("</td>");	
 		echo("<td class=\"cc\" align=\"center\"><a href=\"# \" target=\"_self\"><i class=\"icon-eye-open\"></i></a></td>");
 		echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Delete&id=".$id."&Kode=".$Kode." \" onclick=\"return confirm('Anda Yakin menghapus Data ? ')\"><i class=\"icon-trash\"></i></a></td>");
+		echo("</tr>");	
+	}
+}
+
+function tampilTabelPresensiKK($koneksidb,$pageSql,$field,$formName,$hal,$row,$id){
+	$mySql = $pageSql." ORDER BY tanggal ASC LIMIT $hal, $row";
+	$myQry = mysqli_query($koneksidb, $mySql)  or die ("Query salah : ".$mySql);
+	$nomor  = 1+$hal; 
+	$i=0;
+	while ($kolomData = mysqli_fetch_array($myQry)) {
+		$Kode = $kolomData['iddm'];
+		echo("<tr>");
+		echo("<td align=\"center\">".$nomor++."</td>");
+			echo("<td> ".$kolomData['tanggal']."</b> </td>");
+			echo("<td> ".$kolomData['bahasan']."</b> </td>");
+			echo("<td> ".$kolomData['verifikasi_status']."</b> </td>");
+			$i++;
+		
+		echo("</td>");	
+		echo("<td class=\"cc\" align=\"center\"><a href=\"?page=".$formName."-Confirm&id=".$id."&Kode=".$Kode." \" onclick=\"return confirm('Konfirmasi Kehadiran Dosen ? ')\"><i class=\"icon-edit\"></i></a></td>");
 		echo("</tr>");	
 	}
 }
